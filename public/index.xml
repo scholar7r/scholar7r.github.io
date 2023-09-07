@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Inkwell</title>
+    <link>/</link>
+    <description>Recent content on Inkwell</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <copyright>Inkwell ❤️  LiuSimeng</copyright>
+    <lastBuildDate>Fri, 01 Sep 2023 14:23:27 +0800</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>学业完成标准</title>
+      <link>/contents/college/%E5%AD%A6%E4%B8%9A%E5%AE%8C%E6%88%90%E6%A0%87%E5%87%86/</link>
+      <pubDate>Fri, 01 Sep 2023 14:23:27 +0800</pubDate>
+      
+      <guid>/contents/college/%E5%AD%A6%E4%B8%9A%E5%AE%8C%E6%88%90%E6%A0%87%E5%87%86/</guid>
+      <description>&lt;p&gt;本文档用于本人参考并且制定学习目标规划使用，公开但不予共享与演绎。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

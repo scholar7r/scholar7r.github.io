@@ -1,0 +1,3 @@
+[submodule "themes/inkwell"]
+	path = themes/inkwell
+	url = https://github.com/scholar7r/inkwell.git
