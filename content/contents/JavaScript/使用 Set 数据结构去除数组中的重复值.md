@@ -1,6 +1,7 @@
 ---
 title: "使用 Set 数据结构去除数组中的重复值"
 date: 2023-10-22T00:40:23+08:00
+categories: JavaScript
 draft: false
 ---
 Set 是 JavaScript 中的一个数据结构，它只能包含唯一的值，所以可以使用 Set 集合来跟踪不同的数字。
