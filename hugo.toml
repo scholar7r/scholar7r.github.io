@@ -47,8 +47,8 @@ style = 'base16-snazzy'
 [params]
 favicon = '/favicon.png'
 author = 'Scholar 7r'
-keywords = ['', '', '', '']
-description = ''
+keywords = ['开发', '技术', '生活', '博客', 'Hugo']
+description = 'Scholar 7r 在日常开发中的知识汇总和分享。'
 
 # ===
 # === Header
