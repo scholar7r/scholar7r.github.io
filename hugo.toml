@@ -95,8 +95,8 @@ social = [
 [params.vendor]
 stylesheets = [
   'https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,700&family=Noto+Serif+SC:wght@400;700;900&family=Work+Sans:wght@900&family=Source+Code+Pro&display=swap',
-  'https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css',
-  'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css',
+  'https://cdn.bootcdn.net/ajax/libs/bulma/0.9.4/css/bulma.min.css',
+  'https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css',
   '/css/variables.css',
   '/css/inkwell.css'
 ]
