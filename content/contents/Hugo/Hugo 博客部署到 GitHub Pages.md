@@ -1,7 +1,7 @@
 ---
 title: "Hugo 博客部署到 GitHub Pages"
 date: 2023-09-09T07:06:03+08:00
-categories: Hugo
+categories: "Hugo"
 draft: false
 ---
 GitHub 向个人和组织提供免费的静态托管服务，在 GitHub Pages 服务的加持下，用户可以直接从储存库中构建可直接访问的网站。本篇演示如果通过 GitHub Actions 服务自动部署 Hugo 网站。

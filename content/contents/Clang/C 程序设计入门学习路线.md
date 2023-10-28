@@ -1,6 +1,7 @@
 ---
 title: "C 程序设计入门"
 date: 2023-09-01T14:23:27+08:00
+categories: "C 语言"
 draft: true
 ---
 
