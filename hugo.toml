@@ -94,7 +94,7 @@ social = [
 # automatically pull these resource files and render them
 [params.vendor]
 stylesheets = [
-  'https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,700&family=Noto+Serif+SC:wght@400;700;900&family=Work+Sans:wght@900&family=Source+Code+Pro&display=swap',
+  'https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,700&family=Noto+Sans+SC:wght@400;700;900&family=Work+Sans:wght@900&family=Source+Code+Pro&display=swap',
   'https://cdn.bootcdn.net/ajax/libs/bulma/0.9.4/css/bulma.min.css',
   'https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css',
   '/css/variables.css',
