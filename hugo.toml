@@ -64,7 +64,7 @@ links = [
 # === Article
 # ===
 [params.hero]
-title = 'Scholar 7r 的知识库'
+title = 'Scholar 7r 知识库'
 subtitle = '喧闹任其喧闹，自有我自为之，我自风情万种，与世无争。'
 
 [params.hero.custom]
