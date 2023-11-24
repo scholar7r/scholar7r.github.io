@@ -33,7 +33,7 @@ function getColor({ timeElapsed }) {
 }
 ```
 
-`COLORS` 数组中共计 3 中颜色，保持这段代码不变，那么对 `colorIndex` 变量的赋值运算将如此成立 `timeElapsed % 3`。模拟 `getColor` 函数的执行过程，会发现无论 `timeElapsed` 变量变化，结果都始终在数组的可引用范围之内。
+`COLORS` 数组中共计 3 种颜色，保持这段代码不变，那么对 `colorIndex` 变量的赋值运算将如此成立 `timeElapsed % 3`。模拟 `getColor` 函数的执行过程，会发现无论 `timeElapsed` 变量变化，结果都始终在数组的可引用范围之内。
 
 ```javascript
 const colorIndex = 0 % 3; // 0
