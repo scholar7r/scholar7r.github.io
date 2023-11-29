@@ -6,6 +6,8 @@ draft: false
 ---
 要在 Java Web 项目中连接数据库，首先要准备数据库连接器。在 MySQL 官方网站上能够找到所有版本的数据库连接器。要在 Java Web 项目中连接数据库只需要使用官方提供的 [JDBC](https://dev.mysql.com/downloads/connector/j/ "Download MySQL Connector/J") ，在打开的网页中选择 Platform Independent 选项并下载即可。
 
+<!--more-->
+
 以 8.2.0 版本为例，在下载完成的压缩包中能够找到 `mysql-connector-j-8.2.0.jar` 文件，该 jar 文件提供了 Java 连接到数据库的所有实现方法。由此引申出一个问题「Jar 包是什么，该怎么用？」
 
 维基百科如是写道：在软件领域，JAR 文件（Java 归档）是一种软件包文件格式，通常用于聚合大量的 Java 类文件、相关的元数据和资源文件到一个文件，以便分发 Java 平台应用软件或库。
