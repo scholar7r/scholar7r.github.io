@@ -96,14 +96,10 @@ social = [
 stylesheets = [
   'https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,700&family=Noto+Sans+SC:wght@400;700;900&family=Work+Sans:wght@900&family=Source+Code+Pro&display=swap',
   'https://cdn.bootcdn.net/ajax/libs/bulma/0.9.4/css/bulma.min.css',
-  'https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css',
   '/css/variables.css',
   '/css/inkwell.css'
 ]
 scripts = [
-  'https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js',
-  'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js',
   'https://kit.fontawesome.com/823a96a1b9.js',
-  '/js/navbar.js',
-  '/js/toc.js'
+  '/js/navbar.js'
 ]
