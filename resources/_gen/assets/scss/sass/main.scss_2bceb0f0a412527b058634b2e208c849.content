@@ -1,0 +1,130 @@
+body {
+  font-family: "Literata", "Noto Serif SC", sans-serif;
+  font-size: 1em;
+  line-height: 1.5;
+  color: #000000; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Work Sans", "Noto Serif SC", sans-serif;
+  color: #000000; }
+
+h1 {
+  font-size: 2.375em; }
+
+h2 {
+  font-size: 1.75em; }
+
+h3 {
+  font-size: 1.625em; }
+
+h4 {
+  font-size: 1.5em; }
+
+h5 {
+  font-size: 1.25em; }
+
+h6 {
+  font-size: 1.125em; }
+
+code {
+  font-family: "Source Code Pro";
+  font-size: 0.875em;
+  border-radius: 1em; }
+
+.highlight {
+  margin-bottom: .75em; }
+  .highlight pre {
+    border-radius: 1em; }
+
+blockquote {
+  border-radius: 1em; }
+
+.logo {
+  font-weight: 900; }
+  .logo a:hover {
+    color: #761028; }
+
+.navbar-end > .is-active > .navbar-item {
+  padding: 3em; }
+
+.navbar-item:hover, .navbar-item:focus {
+  color: #761028; }
+
+.navbar-end {
+  position: absolute;
+  right: 0;
+  display: flex;
+  justify-content: flex-end; }
+
+.link {
+  height: 3em;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  .link:hover {
+    color: #761028 !important; }
+
+.hero {
+  padding: 2.65em 0; }
+
+.custom-button {
+  color: #000000;
+  font-size: 0.875em; }
+
+.custom-button:hover {
+  color: #761028; }
+
+.toc {
+  background-color: #d9d9d9;
+  border-radius: 1em;
+  padding: .75em;
+  font-family: "Work Sans", "Noto Serif SC", sans-serif;
+  font-weight: 700; }
+
+.toc-label {
+  cursor: pointer; }
+
+.toc > nav ul:first-child {
+  margin-left: 0; }
+
+.toc > nav ul {
+  list-style: none;
+  font-family: "Literata", "Noto Serif SC", sans-serif; }
+
+.toc > nav ul > li > a {
+  color: #761028; }
+
+.article-item .title a {
+  color: #000000; }
+  .article-item .title a:hover {
+    color: #761028;
+    text-decoration: underline; }
+
+.article-title {
+  color: #000000 !important; }
+
+.article-title > a {
+  color: #000000; }
+  .article-title > a:hover {
+    color: #761028; }
+
+.subtitle {
+  font-size: 1em; }
+
+.pagination .pagination-previous:focus,
+.pagination .pagination-next:focus,
+.pagination .pagination-list li > a:focus {
+  border-color: #761028; }
+
+.pagination .pagination-list li > .is-current {
+  background-color: #761028;
+  border-color: #761028; }
+
+.footer {
+  background-color: #ffffff;
+  padding: 4.25em 0; }
+
+.copyright a, .social a {
+  color: #000000; }
+  .copyright a:hover, .social a:hover {
+    color: #761028; }
