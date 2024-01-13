@@ -1,0 +1,21 @@
+// footer
+.footer {
+  background-color: $primary-bg-color!important;
+  padding: 4.25em 0!important;
+}
+
+.copyright, .social {
+  a {
+    color: $text-color;
+    
+    &:hover {
+      color: $accent-color;
+    }
+
+    &:focus-visible {
+      outline: none;
+    }
+
+    i { outline: none; }
+  }
+}

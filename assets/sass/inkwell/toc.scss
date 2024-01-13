@@ -1,0 +1,26 @@
+// toc
+.toc {
+  background-color: $container-bg-color;
+  border-radius: 1em;
+  padding: .75em;
+  font-family: $family-primary;
+  font-weight: $weight-ultrabold;
+}
+
+.toc-label {
+  cursor: pointer;
+  font-family: $family-secondary;
+}
+
+.toc > nav ul:first-child {
+  margin-left: 0;
+}
+
+.toc > nav ul {
+  list-style: none;
+  font-weight: $weight-normal;
+}
+
+.toc > nav ul > li > a {
+  color: $accent-color;
+}
