@@ -67,16 +67,11 @@ links = [
 title = 'Scholar 7r 知识库'
 subtitle = '喧闹任其喧闹，自有我自为之，我自风情万种，与世无争。'
 
-[params.hero.custom]
-enableCustomButton = false
-label = '阅读'
-link = '/about'
-
 [params.article]
 timeFormat = '2006 年 01 月 02 日'
 
 [params.toc]
-enableSmartTOC = true
+enableToc = true
 
 [params.footer]
 # Inkwell allow you to use icons from font awesome, before you have to make sure that there are font awesome in vendor
