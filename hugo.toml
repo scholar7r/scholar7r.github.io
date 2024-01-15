@@ -73,6 +73,24 @@ timeFormat = '2006 年 01 月 02 日'
 [params.toc]
 enableToc = true
 
+# ===
+# === Comment
+# ===
+[params.giscus]
+enableGiscus = true
+repo="scholar7r/scholar7r.github.io"
+repoId="R_kgDOKQnQHg"
+category="Announcements"
+categoryId="DIC_kwDOKQnQHs4CcbzZ"
+mapping="pathname"
+strict="0"
+reactions="0"
+emit="0"
+inputPosition="top"
+theme="light_tritanopia"
+language="zh-CN"
+loading="lazy"
+
 [params.footer]
 # Inkwell allow you to use icons from font awesome, before you have to make sure that there are font awesome in vendor
 social = [
