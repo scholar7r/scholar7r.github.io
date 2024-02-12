@@ -11,7 +11,7 @@ languageCode = 'zh-CN'
 title = 'Inkwell'
 
 # Theme for whole site
-theme = 'inkwell-bulma-v1'
+theme = 'inkwell'
 
 # Auto-detect Chinese / Japanese / Korean Languages in the content
 hasCJKLanguage = true

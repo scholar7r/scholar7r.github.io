@@ -1,7 +1,4 @@
 [submodule "themes/inkwell"]
 	path = themes/inkwell
-	url = https://github.com/scholar7r/inkwell.git
-[submodule "themes/inkwell-bulma-v1"]
-	path = themes/inkwell-bulma-v1
-	url = https://github.com/scholar7r/Inkwell.git
-	branch = bulma-v1
+  url = https://github.com/scholar7r/inkwell.git
+  branch = bulma-v1
