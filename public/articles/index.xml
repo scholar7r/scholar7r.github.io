@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Articles on Inkwell</title>
+    <link>http://localhost:1313/articles/</link>
+    <description>Recent content in Articles on Inkwell</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 04 Nov 2024 19:49:21 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/articles/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>GitHub Actions 自动化部署续签 SSL 证书</title>
+      <link>http://localhost:1313/articles/auto_acme/</link>
+      <pubDate>Mon, 04 Nov 2024 19:49:21 +0800</pubDate>
+      <guid>http://localhost:1313/articles/auto_acme/</guid>
+      <description>时值 2024 年，大部分云服务器厂商已经停止了 Let&amp;rsquo;s Encrypt 一年的免费 SSL 证书支持，取而代之的是缩短为三个月的免费证书。以静态个人博客用途为例，虽然 SSL 不是硬性需求，但是作为一个已经解析到域名并上线的网站，只有部署了 SSL 证书，才能得到初步的技术认同。&#xA;Inkwell 博客针对中国境内境外做了不同的解析，针对境外的流量，直接通过 CNAME 解析到源站；针对境内的流量，则需要通过阿里云的全站加速 DCDN。阿里云 DCDN 需要对网站配置 SSL 证书，否则无法访问。&#xA;┌ │ │ │ └ ─ R s P ─ ─ e o a ─ ─ d u g ─ ─ i r e ─ ─ r c s ─ ─ e e ─ ┌ │ └ ─ c p ─ ─ U ─ I f _ ─ t s r ─ ─ s ─ s r _ ─ s i o ─ ─ e ─ o _ ─ t v ─ ─ r ─ t m _ ─ t e i ─ ─ ─ h _ ─ o d ─ ─ r ─ _ e C _ ─ a e ─ ─ e ┬ ▽ h _ │ ▽ G n d ─ ─ q ─ _ r i _ n ─ i d ─ ─ u ─ _ e n _ o ─ t f ─ ─ e ─ _ q a _ ─ H G o ─ ─ s ─ _ u _ ─ u i r ─ ─ t ─ _ e _ ─ b t c ─ ┐ │ ┘ _ s _ ─ H e ─ _ t _ ─ P u ─ ─ a b H ─ ─ g T ─ _ y ─ e T ─ _ e ─ s P ─ _ s ─ S ─ _ ┐ │ │ │ ┘ ┌ │ │ └ ─ R f ─ ─ e u ─ ─ d l ─ ─ i l ─ ─ r ─ H _ ─ e s ─ a _ ─ c i ─ s _ ─ t t ─ _ ─ s e ─ a _ ─ ─ _ ┌ │ └ ─ t a ─ S _ ─ S ─ ─ o c ─ S _ ─ S ─ ─ c ─ L _ ─ L ─ ─ A e ─ _ _ ─ ─ ─ l l ┬ ▽ c _ │ ▽ E ─ ─ i e ─ _ e _ n ─ r ─ ─ b r ─ _ r _ o ─ r ─ ─ a a ─ _ t _ ─ o ─ ─ b t ─ _ i _ ─ r ─ ─ a i ─ _ f _ ┐ │ ┘ ─ o ─ _ i _ ─ C n ─ _ c _ ─ l ─ _ a _ ─ o ( ─ _ t _ ─ u D ─ _ e _ ─ d C ─ ─ D ─ ─ N ─ _ y ─ ) ─ _ e ┐ │ │ ┘ _ s ┌ │ │ └ ─ P a ─ ─ r c ─ ─ o c ─ ─ v e ─ ─ i l ─ ─ d e ─ ─ e r ─ ─ a ─ ─ f t ─ ─ u i ─ ─ l o ─ ─ l n ─ ─ ─ ─ s ( ─ ─ i D ─ ─ t C ─ ─ e D ─ ─ N ─ ─ ) ─ ┐ │ │ ┘ 这种解析条件下，如果我不对阿里云全站加速配置 SSL 证书信息，那么通过国内流量访问网站则会出现 ERR_SSL_VERSION_OR_CIPHER_MISMATCH 错误。要解决这个错误，唯有配置好 SSL 证书。</description>
+    </item>
+  </channel>
+</rss>
