@@ -17,9 +17,9 @@ show_more_text = "更多文章"
 show_more_url = "posts"
 
 [[entries]]
-title = "Rss 订阅"
-url = "index.xml"
-
-[[entries]]
 title = "关于我"
 url = "about"
+
+[[entries]]
+title = "Rss 订阅"
+url = "index.xml"
