@@ -1,5 +1,5 @@
 baseURL = 'https://scholar7r.cn/'
-# languageCode = 'en-US'
+languageCode = 'zh-CN'
 title = 'Inkwell'
 author = 'Scholar7r'
 email = 'scholar7r@outlook.com'
@@ -10,7 +10,9 @@ theme = "nostyleplease"
 
 favicon = "favicon.png"
 
-# Configuration for theme <nostyleplease>
+###
+# Themes Configuration
+###
 [module]
 [module.hugoVersion]
 extended = true
@@ -22,6 +24,7 @@ min = "0.41.0"
 [markup.goldmark.parser.attribute]
 block = true
 title = true
+
 [markup.highlight]
 anchorLineNos = false
 codeFences = true
@@ -36,6 +39,7 @@ noClasses = true
 noHl = false
 style = 'github-dark'
 tabWidth = 4
+
 [markup.tableOfContents]
 startLevel = 2
 endLevel = 3
@@ -43,14 +47,15 @@ ordered = false
 
 [params]
 favicon = "favicon.png"
+
 [params.theme_config]
 appearance = "auto"
 back_home_text = ".."
 date_format = "2006-01-02"
 isListGroupByDate = false
+isShowFooter = true
 
 [sass]
-
 [plugins]
 jekyll-feed = true
 jekyll-seo-tag = true

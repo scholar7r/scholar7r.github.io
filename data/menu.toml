@@ -2,7 +2,7 @@
 title = "最新文章"
 
 [entries.post_list]
-limit = 5
+limit = 1
 show_more = true
 show_more_text = "文章归档"
 show_more_url = "articles"
