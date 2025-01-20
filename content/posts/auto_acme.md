@@ -2,8 +2,6 @@
 title = 'GitHub Actions 自动化部署续签 SSL 证书'
 date = 2024-11-04T19:49:21+08:00
 draft = false
-categories = '自动化'
-tags = ['tls', 'acme.sh']
 +++
 
 时值 2024 年，大部分云服务器厂商已经停止了 Let's Encrypt 一年的免费 SSL 证书支持，取而代之的是缩短为三个月的免费证书。以静态个人博客用途为例，虽然 SSL 不是硬性需求，但是作为一个已经解析到域名并上线的网站，只有部署了 SSL 证书，才能得到初步的技术认同。

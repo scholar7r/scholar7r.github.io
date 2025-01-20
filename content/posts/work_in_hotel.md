@@ -2,8 +2,6 @@
 title = '在酒店实习的日子'
 date = 2025-01-04T02:31:21+08:00
 draft = false
-categories = '随笔'
-tags = ['大学', '实习']
 toc = true
 tocBorder = true
 +++
