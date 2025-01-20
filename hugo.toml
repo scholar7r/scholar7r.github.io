@@ -8,7 +8,7 @@ disableHugoGeneratorInject = false
 # Theme
 theme = "nostyleplease"
 
-favicon = "favicon.png"
+favicon = "favicon.ico"
 
 # Disable some kinds
 disableKinds = ["taxonomy", "term"]
@@ -53,5 +53,5 @@ favicon = "favicon.ico"
 appearance = "auto"
 back_home_text = ".."
 date_format = "2006-01-02"
-isListGroupByDate = false
+isListGroupByDate = true
 isShowFooter = true
