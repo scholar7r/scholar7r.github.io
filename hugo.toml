@@ -11,7 +11,7 @@ theme = "nostyleplease"
 favicon = "favicon.png"
 
 # Disable some kinds
-disableKinds = ["taxonomy", "term", "section"]
+disableKinds = ["taxonomy", "term"]
 
 ###
 # Themes Configuration
