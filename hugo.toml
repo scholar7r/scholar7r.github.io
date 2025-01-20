@@ -10,6 +10,9 @@ theme = "nostyleplease"
 
 favicon = "favicon.png"
 
+# Disable some kinds
+disableKinds = ["taxonomy", "term", "section"]
+
 ###
 # Themes Configuration
 ###
@@ -29,8 +32,6 @@ title = true
 anchorLineNos = false
 codeFences = true
 guessSyntax = false
-# hl_Lines = ''
-# hl_inline = false
 lineAnchors = ''
 lineNoStart = 1
 lineNos = false
@@ -46,7 +47,7 @@ endLevel = 3
 ordered = false
 
 [params]
-favicon = "favicon.png"
+favicon = "favicon.ico"
 
 [params.theme_config]
 appearance = "auto"
@@ -54,8 +55,3 @@ back_home_text = ".."
 date_format = "2006-01-02"
 isListGroupByDate = false
 isShowFooter = true
-
-[sass]
-[plugins]
-jekyll-feed = true
-jekyll-seo-tag = true

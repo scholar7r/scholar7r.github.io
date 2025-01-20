@@ -5,5 +5,3 @@ draft = false
 +++
 
 [GitHub](https://github.com/scholar7r)
-[Categories](/categories)
-[Tags](/tags)
