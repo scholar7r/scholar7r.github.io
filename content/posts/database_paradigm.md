@@ -4,7 +4,7 @@ date = 2025-01-20T21:28:30+08:00
 draft = false
 +++
 
-数据库设计的三大范式是指关系数据库设计中的三种规范化标准，分别是第一范式（1NF）、第二范式（2NF）和第三范式（3NF）。这些范式旨在减少数据冗余，提高数据一致性和完整性。
+数据库设计的三大范式是指关系数据库设计中的三种规范化标准，分别是第一范式（1NF）[^1]、第二范式（2NF）[^2]和第三范式（3NF）[^3]。这些范式旨在减少数据冗余，提高数据一致性和完整性。
 
 ## 第一范式（1NF）
 
@@ -87,3 +87,8 @@ draft = false
 | 2   | CommonIO | Verizon |
 
 总的来说，数据库三大范式的主要目的是减少数据冗余，提高数据一致性和完整性。第一范式要求每个字段只能存储一个值，第二范式要求每个非主属性必须完全依赖于主键，而第三范式要求每个非主属性必须直接依赖于主键。
+
+{data-content="footnotes"}
+[^1]: [第一范式（1NF）](https://en.wikipedia.org/wiki/First_normal_form)
+[^2]: [第二范式（2NF）](https://en.wikipedia.org/wiki/Second_normal_form)
+[^3]: [第三范式（3NF）](https://en.wikipedia.org/wiki/Third_normal_form)
