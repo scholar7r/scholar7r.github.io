@@ -28,25 +28,10 @@ unsafe = true
 [markup.goldmark.parser]
 [markup.goldmark.parser.attribute]
 block = true
-title = true
 
 [markup.highlight]
-anchorLineNos = false
-codeFences = true
-guessSyntax = false
-lineAnchors = ''
-lineNoStart = 1
-lineNos = false
-lineNumbersInTable = true
-noClasses = true
-noHl = false
 style = 'github-dark'
 tabWidth = 4
-
-[markup.tableOfContents]
-startLevel = 2
-endLevel = 3
-ordered = false
 
 [params]
 favicon = "favicon.ico"
