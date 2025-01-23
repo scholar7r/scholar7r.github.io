@@ -23,6 +23,8 @@ min = "0.41.0"
 
 [markup]
 [markup.goldmark]
+[markup.goldmark.renderer]
+unsafe = true
 [markup.goldmark.parser]
 [markup.goldmark.parser.attribute]
 block = true
