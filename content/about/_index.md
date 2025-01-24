@@ -5,16 +5,13 @@ title: Scholar 7r
 [GitHub](https://github.com/scholar7r)
 [Outlook](mailto://scholar7r@outlook.com)
 
+> “The only way to do great work is to love what you do.”
+>
+> — Steve Jobs
+
 一个自学全栈的普通人。Inkwell 博客是我的学习笔记，我在此记录一些值得学习的案列经验。分享已有的开发成果。这个博客使用 Hugo 搭建，使用 [NoStylePlease](https://github.com/hanwenguo/hugo-theme-nostyleplease/) 主题。
 
-![Neovim](https://img.shields.io/badge/-Neovim-57A143?style=flat&logo=Neovim&logoColor=white)
-{style="display:inline-block; margin:0 5px;"}
-
-![Lazyvim](https://img.shields.io/badge/-Lazyvim-57A143?style=flat&logo=Neovim&logoColor=white)
-{style="display:inline-block; margin:0 5px;"}
-
-![Jetbrains](https://img.shields.io/badge/-Jetbrains-000000?style=flat&logo=Jetbrains&logoColor=white)
-{style="display:inline-block; margin:0 5px;"}
+**技术栈**
 
 ![JavaScript](https://img.shields.io/badge/-JavaScript-F7DF1E?style=flat&logo=JavaScript&logoColor=white)
 {style="display:inline-block; margin:0 5px;"}
@@ -49,6 +46,28 @@ title: Scholar 7r
 ![GitHub Actions](https://img.shields.io/badge/-GitHub_Actions-2088FF?style=flat&logo=GitHub-Actions&logoColor=white)
 {style="display:inline-block; margin:0 5px;"}
 
-> “The only way to do great work is to love what you do.”
->
-> — Steve Jobs
+**工具**
+
+![Neovim](https://img.shields.io/badge/-Neovim-57A143?style=flat&logo=Neovim&logoColor=white)
+{style="display:inline-block; margin:0 5px;"}
+
+![Lazyvim](https://img.shields.io/badge/-Lazyvim-57A143?style=flat&logo=Neovim&logoColor=white)
+{style="display:inline-block; margin:0 5px;"}
+
+![Jetbrains](https://img.shields.io/badge/-Jetbrains-000000?style=flat&logo=Jetbrains&logoColor=white)
+{style="display:inline-block; margin:0 5px;"}
+
+![Simple Icons](https://img.shields.io/badge/-Simple_Icons-111111?style=flat&logo=Simple-Icons&logoColor=white)
+{style="display:inline-block; margin:0 5px;"}
+
+![Hugo](https://img.shields.io/badge/-Hugo-FF4088?style=flat&logo=Hugo&logoColor=white)
+{style="display:inline-block; margin:0 5px;"}
+
+![Wezterm](https://img.shields.io/badge/-Wezterm-000000?style=flat&logo=Wezterm&logoColor=white)
+{style="display:inline-block; margin:0 5px;"}
+
+![ChatGPT](https://img.shields.io/badge/-ChatGPT-0084FF?style=flat&logo=OpenAI&logoColor=white)
+{style="display:inline-block; margin:0 5px;"}
+
+![Copilot](https://img.shields.io/badge/-Copilot-000000?style=flat&logo=GitHub&logoColor=white)
+{style="display:inline-block; margin:0 5px;"}
