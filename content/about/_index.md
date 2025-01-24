@@ -1,21 +1,54 @@
 ---
 title: Scholar 7r
 ---
+
 [GitHub](https://github.com/scholar7r)
 [Outlook](mailto://scholar7r@outlook.com)
 
-「Inkwell」是我自 2024 年重新开始的个人博客，建立这个博客的初衷是为了记录我遇到的开发的难题以及一些疑难杂症的解决思路和方案。这个博客使用 Hugo 作为生成系统，使用 NoStylePlease 主题，将专注力集中在内容上。
+一个自学全栈的普通人。Inkwell 博客是我的学习笔记，我在此记录一些值得学习的案列经验。分享已有的开发成果。这个博客使用 Hugo 搭建，使用 [NoStylePlease](https://github.com/hanwenguo/hugo-theme-nostyleplease/) 主题。
 
-Scholar 7r 是我的通用网名，译为「小秀才」，原为 Scholar Jr，因为我姓刘名琪，为了在其中附带一点个人特色，便把 Jr 改为了 7r。我是湖北监利人，从小学学习易语言到初高中学习 Java。编程已经成为我热爱事物的一部分，我希望能够带着这份热爱坚持下去。
+![Neovim](https://img.shields.io/badge/-Neovim-57A143?style=flat&logo=Neovim&logoColor=white)
+{style="display:inline-block; margin:0 5px;"}
 
-TheCW 是我的编程和 Linux 启蒙导师，在此也力荐 TheCW 的教学视频，特别是对 Vim 以及 Neovim 的讲解。
+![Lazyvim](https://img.shields.io/badge/-Lazyvim-57A143?style=flat&logo=Neovim&logoColor=white)
+{style="display:inline-block; margin:0 5px;"}
 
-我喜欢使用 Neovim 以及 Jetbrains 的集成开发环境作为我的常用编辑器，下列是我熟悉的开发技术栈。
+![Jetbrains](https://img.shields.io/badge/-Jetbrains-000000?style=flat&logo=Jetbrains&logoColor=white)
+{style="display:inline-block; margin:0 5px;"}
 
-- Java
-- Spring Boot
-- React
-- Remix
-- NodeJs
+![JavaScript](https://img.shields.io/badge/-JavaScript-F7DF1E?style=flat&logo=JavaScript&logoColor=white)
+{style="display:inline-block; margin:0 5px;"}
 
-技术来者不拒，学习永无止境。
+![TypeScript](https://img.shields.io/badge/-TypeScript-007ACC?style=flat&logo=TypeScript&logoColor=white)
+{style="display:inline-block; margin:0 5px;"}
+
+![NodeJs](https://img.shields.io/badge/-NodeJs-339933?style=flat&logo=Node.js&logoColor=white)
+{style="display:inline-block; margin:0 5px;"}
+
+![React](https://img.shields.io/badge/-React-61DAFB?style=flat&logo=React&logoColor=white)
+{style="display:inline-block; margin:0 5px;"}
+
+![Remix](https://img.shields.io/badge/-Remix-000000?style=flat&logo=Remix&logoColor=white)
+{style="display:inline-block; margin:0 5px;"}
+
+![Spring](https://img.shields.io/badge/-Spring-6DB33F?style=flat&logo=Spring&logoColor=white)
+{style="display:inline-block; margin:0 5px;"}
+
+![MySQL](https://img.shields.io/badge/-MySQL-4479A1?style=flat&logo=MySQL&logoColor=white)
+{style="display:inline-block; margin:0 5px;"}
+
+![Rust](https://img.shields.io/badge/-Rust-000000?style=flat&logo=Rust&logoColor=white)
+{style="display:inline-block; margin:0 5px;"}
+
+![C++](https://img.shields.io/badge/-C++-00599C?style=flat&logo=C%2B%2B&logoColor=white)
+{style="display:inline-block; margin:0 5px;"}
+
+![Linux](https://img.shields.io/badge/-Linux-FCC624?style=flat&logo=Linux&logoColor=white)
+{style="display:inline-block; margin:0 5px;"}
+
+![GitHub Actions](https://img.shields.io/badge/-GitHub_Actions-2088FF?style=flat&logo=GitHub-Actions&logoColor=white)
+{style="display:inline-block; margin:0 5px;"}
+
+> “The only way to do great work is to love what you do.”
+>
+> — Steve Jobs
