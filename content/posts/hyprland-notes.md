@@ -71,6 +71,38 @@ Chromium 系应用默认使用 XWayland，因此需要手动启用 Wayland。
 bind = SUPER, ESCAPE. exec, wlogout
 ```
 
+## Secure Boot
+
+与 Ubuntu 和 Fedora 等默认支持 Secure Boot 的发行版不同，Arch Linux 默认不提供 Secure Boot 支持，需要手动签名来启用。
+
+依照官方 Wiki 进行签名过于繁琐，且在后续使用期间可能会因为软件的修改导致签名失效无法启动等问题，不建议采取官方的解决方案，推荐使用 [SbCtl](https://github.com/Foxboron/sbctl) 来简化签名过程。
+
+```sh
+pacman -S sbctl
+```
+
+在进行签名之前要在 BIOS 中将 Secure Boot 设置为 Setup Mode。
+
+```sh
+# 检查当前安全启动状态
+sbctl status
+
+# 创建用户自定义密钥
+sbctl create-keys
+
+# 注册密钥
+sbctl enroll-keys
+
+# 检查当前镜像卡签名状态
+# 该命令会列出所有需要签名的镜像，所有的镜像签名后才能够启用 Secure Boot
+sbctl verify
+
+# 进行签名
+sbctl sign -s <filename>
+```
+
+签名完成之后建议使用 `sbctl verify` 再次验证签名状态，如果有未签名的镜像，则需要重新进行签名。
+
 ```goat
 +--------------------------------------------------------------------------------------+
 | +------------+-----------------------+------+-----------------+------+-------------+ |
