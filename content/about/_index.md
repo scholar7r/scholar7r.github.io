@@ -22,6 +22,9 @@ title: Scholar 7r
 ![NodeJs](https://img.shields.io/badge/-NodeJs-339933?style=flat&logo=Node.js&logoColor=white)
 {style="display:inline-block; margin:0 5px;"}
 
+![Vue](https://img.shields.io/badge/-Vue-4FC08D?style=flat&logo=Vue.js&logoColor=white)
+{style="display:inline-block; margin:0 5px;"}
+
 ![React](https://img.shields.io/badge/-React-61DAFB?style=flat&logo=React&logoColor=white)
 {style="display:inline-block; margin:0 5px;"}
 
@@ -71,3 +74,8 @@ title: Scholar 7r
 
 ![Copilot](https://img.shields.io/badge/-Copilot-000000?style=flat&logo=GitHub&logoColor=white)
 {style="display:inline-block; margin:0 5px;"}
+
+**正在找工作**
+**Seek for a job**
+
+如果您的公司缺少全栈开发，前端后端开发，或是需要运维开发等与技术相关的工作，您可以通过我的邮箱联系我 scholar7r@outlook.com
