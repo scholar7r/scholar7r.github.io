@@ -13,6 +13,12 @@ title: Scholar 7r
 
 **技术栈**
 
+![Flutter](https://img.shields.io/badge/-Flutter-02569B?style=flat&logo=Flutter&logoColor=white)
+{style="display:inline-block; margin:0 5px;"}
+
+![Dart](https://img.shields.io/badge/-Dart-0175C2?style=flat&logo=Dart&logoColor=white)
+{style="display:inline-block; margin:0 5px;"}
+
 ![JavaScript](https://img.shields.io/badge/-JavaScript-F7DF1E?style=flat&logo=JavaScript&logoColor=white)
 {style="display:inline-block; margin:0 5px;"}
 
@@ -35,12 +41,6 @@ title: Scholar 7r
 {style="display:inline-block; margin:0 5px;"}
 
 ![MySQL](https://img.shields.io/badge/-MySQL-4479A1?style=flat&logo=MySQL&logoColor=white)
-{style="display:inline-block; margin:0 5px;"}
-
-![Rust](https://img.shields.io/badge/-Rust-000000?style=flat&logo=Rust&logoColor=white)
-{style="display:inline-block; margin:0 5px;"}
-
-![C++](https://img.shields.io/badge/-C++-00599C?style=flat&logo=C%2B%2B&logoColor=white)
 {style="display:inline-block; margin:0 5px;"}
 
 ![Linux](https://img.shields.io/badge/-Linux-FCC624?style=flat&logo=Linux&logoColor=white)
