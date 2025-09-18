@@ -3,7 +3,7 @@ title: Scholar 7r
 ---
 
 [GitHub](https://github.com/scholar7r)
-[Outlook](mailto://scholar7r@outlook.com)
+[Outlook](mailto:scholar7r@outlook.com)
 
 > “The only way to do great work is to love what you do.”
 >
@@ -78,4 +78,4 @@ title: Scholar 7r
 **正在找工作**
 **Seek for a job**
 
-如果您的公司缺少全栈开发，前端后端开发，或是需要运维开发等与技术相关的工作，您可以通过我的邮箱联系我 scholar7r@outlook.com
+如果您的公司缺少全栈开发，前端后端开发，或是需要运维开发等与技术相关的工作，您可以通过我的邮箱联系我 <scholar7r@outlook.com>
