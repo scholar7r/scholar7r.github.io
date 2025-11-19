@@ -2,7 +2,7 @@ baseURL = 'https://scholar7r.cn/'
 languageCode = 'zh-CN'
 title = 'Inkwell'
 author = 'Scholar7r'
-email = 'scholar7r@outlook.com'
+email = 'mail@scholar7r.cn'
 disableHugoGeneratorInject = false
 
 # Theme
