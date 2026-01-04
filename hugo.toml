@@ -1,8 +1,8 @@
-baseURL = 'https://scholar7r.cn/'
+baseURL = 'https://0x7r.com/'
 languageCode = 'zh-CN'
 title = 'Inkwell'
-author = 'Scholar7r'
-email = 'mail@scholar7r.cn'
+author = 'scholar7r'
+email = 'mail@0x7r.com'
 disableHugoGeneratorInject = false
 
 # Theme
