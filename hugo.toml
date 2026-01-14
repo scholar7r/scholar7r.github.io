@@ -1,5 +1,5 @@
 baseurl = "/"
-languageCode = "en-us"
+languageCode = "zh-cn"
 # Add it only if you keep the theme in the `themes` directory.
 # Remove it if you use the theme as a remote Hugo Module.
 theme = "terminal"
@@ -79,9 +79,9 @@ languageName = "Chinese"
 title = "Inkwell"
 
 [languages.zh.params]
-subtitle = ""
+subtitle = "随想随写。"
 owner = "scholar7r"
-keywords = ""
+keywords = "Golang, Gopher"
 copyright = "Copyright (c) 2026 scholar7r."
 menuMore = "更多"
 readMore = "阅读原文"
