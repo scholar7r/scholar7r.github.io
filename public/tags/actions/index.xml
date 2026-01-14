@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Actions on Inkwell</title>
+    <link>//localhost:1313/tags/actions/</link>
+    <description>Recent content in Actions on Inkwell</description>
+    <generator>Hugo</generator>
+    <language>zh</language>
+    <copyright>Copyright (c) 2026 scholar7r.</copyright>
+    <lastBuildDate>Mon, 04 Nov 2024 19:49:21 +0800</lastBuildDate>
+    <atom:link href="//localhost:1313/tags/actions/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>GitHub Actions 自动化部署续签 SSL 证书</title>
+      <link>//localhost:1313/posts/auto_acme/</link>
+      <pubDate>Mon, 04 Nov 2024 19:49:21 +0800</pubDate>
+      <guid>//localhost:1313/posts/auto_acme/</guid>
+      <description>&lt;p&gt;时值 2024 年，大部分云服务器厂商已经停止了 Let&amp;rsquo;s Encrypt 一年的免费 SSL 证书支持，取而代之的是缩短为三个月的免费证书。以静态个人博客用途为例，虽然 SSL 不是硬性需求，但是作为一个已经解析到域名并上线的网站，只有部署了 SSL 证书，才能得到初步的技术认同。&lt;/p&gt;&#xA;&lt;p&gt;Inkwell 博客针对中国境内境外做了不同的解析，针对境外的流量，直接通过 CNAME 解析到源站；针对境内的流量，则需要通过阿里云的全站加速 DCDN。阿里云 DCDN 需要对网站配置 SSL 证书，否则无法访问。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

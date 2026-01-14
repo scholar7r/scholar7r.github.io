@@ -1,0 +1,113 @@
+baseurl = "/"
+languageCode = "en-us"
+# Add it only if you keep the theme in the `themes` directory.
+# Remove it if you use the theme as a remote Hugo Module.
+theme = "terminal"
+pagination.pagerSize = 5
+
+copyright = "Copyright (c) 2026 scholar7r."
+
+# Required for Chroma and the custom syntax highlighting.
+[markup.highlight]
+noClasses = false
+
+[params]
+# dir name of your main content (default is `content/posts`).
+# the list of set content will show up on your index page (baseurl).
+contentTypeName = "posts"
+
+# if you set this to 0, only submenu trigger will be visible
+showMenuItems = 2
+
+# show selector to switch language
+showLanguageSelector = false
+
+# set theme to full screen width
+fullWidthTheme = false
+
+# center theme with default width
+centerTheme = true
+
+# if your resource directory contains an image called `cover.(jpg|png|webp)`,
+# then the file will be used as a cover automatically.
+# With this option you don't have to put the `cover` param in a front-matter.
+autoCover = false
+
+# set post to show the last updated
+# If you use git, you can set `enableGitInfo` to `true` and then post will automatically get the last updated
+showLastUpdated = false
+
+# Provide a string as a prefix for the last update date. By default, it looks like this: 2020-xx-xx [Updated: 2020-xx-xx] :: Author
+# updatedDatePrefix = "Updated"
+
+# whether to show a page's estimated reading time
+# readingTime = false # default
+
+# whether to show a table of contents
+# can be overridden in a page's front-matter
+# Toc = false # default
+
+# set title for the table of contents
+# can be overridden in a page's front-matter
+# TocTitle = "Table of Contents" # default
+
+# Set date/time format for posts
+# This will impact the date/time displayed on
+# index.html, the posts list page, and on posts themselves
+# This value can also be configured per-post on front matter
+# If you have any issues with the timezone rendering differently
+# than you expected, please ensure your timezone is correctly set
+# on your server.
+# This value can be customized according to Hugo documentation:
+# https://gohugo.io/functions/time/format/
+# Default value (no changes needed):
+# dateFormat = "2006-01-02"
+# Example format, with date, time, and timezone abbreviation:
+# dateFormat = "2006-01-02 3:04:06 PM MST"
+
+
+[params.twitter]
+# set Twitter handles for Twitter cards
+# see https://developer.twitter.com/en/docs/tweets/optimize-with-cards/guides/getting-started#card-and-content-attribution
+# do not include @
+creator = "scholar7r"
+site = "Inlwell"
+
+[languages]
+[languages.zh]
+languageName = "Chinese"
+title = "Inkwell"
+
+[languages.zh.params]
+subtitle = ""
+owner = "scholar7r"
+keywords = ""
+copyright = "Copyright (c) 2026 scholar7r."
+menuMore = "更多"
+readMore = "阅读原文"
+readOtherPosts = "阅读更多"
+newerPosts = "上一页"
+olderPosts = "下一页"
+missingContentMessage = "不存在的页面..."
+missingBackButtonLabel = "回到主页"
+minuteReadingTime = "分钟"
+words = "词"
+
+[languages.zh.params.logo]
+logoText = "Inkwell"
+logoHomeLink = "/"
+
+[languages.zh.menu]
+[[languages.zh.menu.main]]
+identifier = "github"
+name = "GitHub"
+url = "https://github.com/scholar7r"
+
+[markup]
+[markup.goldmark]
+[markup.goldmark.renderer]
+unsafe = true
+[markup.goldmark.parser]
+[markup.goldmark.parser.attribute]
+block = true
+title = true

@@ -1,0 +1,2047 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  
+    <title>深入浅出 DNS :: Inkwell</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="域名系统 (Domain Name System) 用作将域名和 IP 地址相互映射的一个分布式数据库，能够使人们更方便地访问互联网。DNS 使用 TCP 和 UDP 端口 53。目前对于每个一级域名长度的限制是 63 个字符，域名总长度不得超过 253 个字符。
+" />
+<meta name="keywords" content="" />
+
+  <meta name="robots" content="noodp" />
+
+<link rel="canonical" href="//localhost:1313/posts/dns_explain_in_simple_terms/" />
+
+
+
+
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/buttons.min.86f6b4c106b6c6eb690ae5203d36b442c1f66f718ff4e8164fa86cf6c61ad641.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/code.min.d529ea4b2fb8d34328d7d31afc5466d5f7bc2f0bc9abdd98b69385335d7baee4.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/fonts.min.5bb7ed13e1d00d8ff39ea84af26737007eb5051b157b86fc24487c94f3dc8bbe.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/footer.min.eb8dfc2c6a7eafa36cd3ba92d63e69e849e2200e0002a228d137f236b09ecd75.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/gist.min.a751e8b0abe1ba8bc53ced52a38b19d8950fe78ca29454ea8c2595cf26aad5c0.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/header.min.75c7eb0e2872d95ff48109c6647d0223a38db52e2561dd87966eb5fc7c6bdac6.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/main.min.36833afd348409fc6c3d09d0897c5833d9d5bf1ff31f5e60ea3ee42ce2b1268c.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/menu.min.3c17467ebeb3d38663dce68f71f519901124fa5cbb4519b2fb0667a21e9aca39.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/pagination.min.bbb986dbce00a5ce5aca0504b7925fc1c581992a4bf57f163e5d69cc1db7d836.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/post.min.e6dddd258e64c83e05cec0cd49c05216742d42fc8ecbfbe6b67083412b609bd3.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/syntax.min.a0773cce9310cb6d8ed23e50f005448facf29a53001b57e038828daa466b25c0.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/terminal.min.e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/terms.min.b81791663c3790e738e571cdbf802312390d30e4b1d8dc9d814a5b5454d0ac11.css">
+
+
+
+
+
+
+
+<link rel="shortcut icon" href="//localhost:1313/favicon.png">
+<link rel="apple-touch-icon" href="//localhost:1313/apple-touch-icon.png">
+
+
+<meta name="twitter:card" content="summary" />
+
+  
+    <meta name="twitter:site" content="Inlwell" />
+  
+    <meta name="twitter:creator" content="scholar7r" />
+
+
+
+<meta property="og:locale" content="zh" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="深入浅出 DNS">
+<meta property="og:description" content="域名系统 (Domain Name System) 用作将域名和 IP 地址相互映射的一个分布式数据库，能够使人们更方便地访问互联网。DNS 使用 TCP 和 UDP 端口 53。目前对于每个一级域名长度的限制是 63 个字符，域名总长度不得超过 253 个字符。
+" />
+<meta property="og:url" content="//localhost:1313/posts/dns_explain_in_simple_terms/" />
+<meta property="og:site_name" content="Inkwell" />
+
+  <meta property="og:image" content="//localhost:1313/og-image.png">
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+
+  <meta property="article:published_time" content="2025-11-24 11:06:32 &#43;0800 CST" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body>
+
+
+<div class="container center">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    Inkwell
+  </div>
+</a>
+
+    </div>
+    
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="https://github.com/scholar7r">GitHub</a></li>
+        
+      
+      
+    </ul>
+  </li>
+</ul>
+
+    
+    
+  </div>
+  
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    
+      
+        
+          <li><a href="https://github.com/scholar7r" >GitHub</a></li>
+        
+      
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<article class="post">
+  <h1 class="post-title">
+    <a href="//localhost:1313/posts/dns_explain_in_simple_terms/">深入浅出 DNS</a>
+  </h1>
+  <div class="post-meta"><time class="post-date">2025-11-24</time><span class="post-author">scholar7r</span></div>
+
+  
+  
+
+
+  
+
+  <div class="post-content"><div>
+        <p>域名系统 (Domain Name System) 用作将域名和 IP 地址相互映射的一个分布式数据库，能够使人们更方便地访问互联网。DNS 使用 TCP 和 UDP 端口 53。目前对于每个一级域名长度的限制是 63 个字符，域名总长度不得超过 253 个字符。</p>
+<h2 id="记录类型">记录类型<a href="#记录类型" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p>DNS 的记录称之为资源记录 (Resource record)，常见类型有：</p>
+<ul>
+<li>主机记录 (A 记录)： <code>RFC 1035</code> 定义，将特定的主机名映射到对应主机的 IP 地址上。</li>
+<li>别名记录 (CNAME 记录)：<code>RFC 1035</code> 定义，将某个别名指向到某个 A 记录上，这样就不用再次为某一个新名字指定一条新的 A 记录。</li>
+<li>IPv6 主机记录 (AAAA 记录)：<code>RFC 3596</code> 定义，与 A 记录对应，将特定的主机名映射到对应主机的 IPv6 地址。</li>
+<li>服务位置记录 (SRV 记录)：<code>RFC 2782</code> 定义，用于提供特定服务的服务器的位置。</li>
+<li>域名服务器记录 (NS 记录)：用来指定该域名由哪个DNS服务器来进行解析。</li>
+<li>NAPTR 记录：<code>RFC 3403</code> 定义，提供正则表达式方式去映射域名。</li>
+</ul>
+<p>在开源项目 <a href="https://codeberg.org/miekg/dns">miekg/dns</a> 中有如下定义：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">const</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeNone</span><span class="w">       </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeA</span><span class="w">          </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeNS</span><span class="w">         </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeMD</span><span class="w">         </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">3</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeMF</span><span class="w">         </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">4</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeCNAME</span><span class="w">      </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">5</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeSOA</span><span class="w">        </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">6</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeMB</span><span class="w">         </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">7</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeMG</span><span class="w">         </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">8</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeMR</span><span class="w">         </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">9</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeNULL</span><span class="w">       </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">10</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypePTR</span><span class="w">        </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">12</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeHINFO</span><span class="w">      </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">13</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeMINFO</span><span class="w">      </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">14</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeMX</span><span class="w">         </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">15</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeTXT</span><span class="w">        </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">16</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeRP</span><span class="w">         </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">17</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeAFSDB</span><span class="w">      </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">18</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeX25</span><span class="w">        </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">19</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeISDN</span><span class="w">       </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">20</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeRT</span><span class="w">         </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">21</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeNSAPPTR</span><span class="w">    </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">23</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeSIG</span><span class="w">        </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">24</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeKEY</span><span class="w">        </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">25</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypePX</span><span class="w">         </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">26</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeGPOS</span><span class="w">       </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">27</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeAAAA</span><span class="w">       </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">28</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeLOC</span><span class="w">        </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">29</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeNXT</span><span class="w">        </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">30</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeEID</span><span class="w">        </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">31</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeNIMLOC</span><span class="w">     </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeSRV</span><span class="w">        </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">33</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeATMA</span><span class="w">       </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">34</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeNAPTR</span><span class="w">      </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">35</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeKX</span><span class="w">         </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">36</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeCERT</span><span class="w">       </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">37</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeDNAME</span><span class="w">      </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">39</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeOPT</span><span class="w">        </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">41</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeAPL</span><span class="w">        </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">42</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeDS</span><span class="w">         </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">43</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeSSHFP</span><span class="w">      </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">44</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeIPSECKEY</span><span class="w">   </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">45</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeRRSIG</span><span class="w">      </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">46</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeNSEC</span><span class="w">       </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">47</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeDNSKEY</span><span class="w">     </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">48</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeDHCID</span><span class="w">      </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">49</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeNSEC3</span><span class="w">      </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">50</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeNSEC3PARAM</span><span class="w"> </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">51</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeTLSA</span><span class="w">       </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">52</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeSMIMEA</span><span class="w">     </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">53</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeHIP</span><span class="w">        </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">55</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeNINFO</span><span class="w">      </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">56</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeRKEY</span><span class="w">       </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">57</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeTALINK</span><span class="w">     </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">58</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeCDS</span><span class="w">        </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">59</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeCDNSKEY</span><span class="w">    </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">60</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeOPENPGPKEY</span><span class="w"> </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">61</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeCSYNC</span><span class="w">      </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">62</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeZONEMD</span><span class="w">     </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">63</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeSVCB</span><span class="w">       </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">64</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeHTTPS</span><span class="w">      </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">65</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeDSYNC</span><span class="w">      </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">66</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeSPF</span><span class="w">        </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">99</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeUINFO</span><span class="w">      </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">100</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeUID</span><span class="w">        </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">101</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeGID</span><span class="w">        </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">102</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeUNSPEC</span><span class="w">     </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">103</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeNID</span><span class="w">        </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">104</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeL32</span><span class="w">        </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">105</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeL64</span><span class="w">        </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">106</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeLP</span><span class="w">         </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">107</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeEUI48</span><span class="w">      </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">108</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeEUI64</span><span class="w">      </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">109</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeNXNAME</span><span class="w">     </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">128</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeURI</span><span class="w">        </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">256</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeCAA</span><span class="w">        </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">257</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeAVC</span><span class="w">        </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">258</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeAMTRELAY</span><span class="w">   </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">260</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">TypeRESINFO</span><span class="w">    </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">261</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></div><h2 id="dig-查询">DiG 查询<a href="#dig-查询" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p>尝试使用 DiG 进行查询 <code>scholar7r.cn</code> 域名，结果剔除了一些 IPv6 请求的错误和 DNSSEC 返回的相关数据：</p>
+<pre tabindex="0"><code>; &lt;&lt;&gt;&gt; DiG 9.20.15 &lt;&lt;&gt;&gt; +trace scholar7r.cn
+;; global options: +cmd
+.   2829 IN NS g.root-servers.net.
+.   2829 IN NS e.root-servers.net.
+.   2829 IN NS l.root-servers.net.
+.   2829 IN NS j.root-servers.net.
+.   2829 IN NS h.root-servers.net.
+.   2829 IN NS a.root-servers.net.
+.   2829 IN NS d.root-servers.net.
+.   2829 IN NS m.root-servers.net.
+.   2829 IN NS f.root-servers.net.
+.   2829 IN NS c.root-servers.net.
+.   2829 IN NS b.root-servers.net.
+.   2829 IN NS i.root-servers.net.
+.   2829 IN NS k.root-servers.net.
+;; Received 444 bytes from 223.5.5.5#53(223.5.5.5) in 6 ms
+
+cn.   172800 IN NS ns.cernet.net.
+cn.   172800 IN NS c.dns.cn.
+cn.   172800 IN NS a.dns.cn.
+cn.   172800 IN NS b.dns.cn.
+cn.   172800 IN NS d.dns.cn.
+cn.   172800 IN NS e.dns.cn.
+;; Received 725 bytes from 2001:dc3::35#53(m.root-servers.net) in 67 ms
+
+scholar7r.cn.  86400 IN NS aria.ns.cloudflare.com.
+scholar7r.cn.  86400 IN NS patryk.ns.cloudflare.com.
+;; Received 672 bytes from 203.119.29.1#53(e.dns.cn) in 48 ms
+
+scholar7r.cn.  300 IN A 104.21.51.46
+scholar7r.cn.  300 IN A 172.67.221.101
+;; Received 181 bytes from 108.162.192.68#53(aria.ns.cloudflare.com) in 83 ms
+</code></pre><p>上面是一个递归的请求，从根域名服务器开始一步一步请求到 <code>scholar7r.cn</code> 解析的 IP 地址。</p>
+<ol>
+<li>客户端发起请求查询根服务器。</li>
+<li>根服务器返回 13 个（A - M）的根服务器记录</li>
+<li>选取一个根服务器查询 <code>cn.</code> 顶级域名</li>
+<li>返回权威域名的名称服务器记录</li>
+<li>选取一个权威域名服务器查询 <code>scholar7r.cn</code></li>
+<li>权威域名服务器返回 Cloudflare 名称服务器记录</li>
+<li>选举一个名称服务器查询 <code>scholar7r.cn</code></li>
+<li>返回结果 IP 地址</li>
+</ol>
+
+
+
+<div class="goat svg-container ">
+  
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      font-family="Menlo,Lucida Console,monospace"
+      
+        viewBox="0 0 632 489"
+      >
+      <g transform='translate(8,16)'>
+<text text-anchor='middle' x='8' y='4' fill='currentColor' style='font-size:1em'>┌</text>
+<text text-anchor='middle' x='8' y='20' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='8' y='36' fill='currentColor' style='font-size:1em'>└</text>
+<text text-anchor='middle' x='8' y='436' fill='currentColor' style='font-size:1em'>┌</text>
+<text text-anchor='middle' x='8' y='452' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='8' y='468' fill='currentColor' style='font-size:1em'>└</text>
+<text text-anchor='middle' x='16' y='4' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='16' y='20' fill='currentColor' style='font-size:1em'>C</text>
+<text text-anchor='middle' x='16' y='36' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='16' y='436' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='16' y='452' fill='currentColor' style='font-size:1em'>C</text>
+<text text-anchor='middle' x='16' y='468' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='24' y='4' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='24' y='20' fill='currentColor' style='font-size:1em'>l</text>
+<text text-anchor='middle' x='24' y='36' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='24' y='436' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='24' y='452' fill='currentColor' style='font-size:1em'>l</text>
+<text text-anchor='middle' x='24' y='468' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='32' y='4' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='32' y='20' fill='currentColor' style='font-size:1em'>i</text>
+<text text-anchor='middle' x='32' y='36' fill='currentColor' style='font-size:1em'>┬</text>
+<text text-anchor='middle' x='32' y='52' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='32' y='68' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='32' y='84' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='32' y='100' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='32' y='116' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='32' y='132' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='32' y='148' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='32' y='164' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='32' y='180' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='32' y='196' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='32' y='212' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='32' y='228' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='32' y='244' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='32' y='260' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='32' y='276' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='32' y='292' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='32' y='308' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='32' y='324' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='32' y='340' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='32' y='356' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='32' y='372' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='32' y='388' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='32' y='404' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='32' y='420' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='32' y='436' fill='currentColor' style='font-size:1em'>┴</text>
+<text text-anchor='middle' x='32' y='452' fill='currentColor' style='font-size:1em'>i</text>
+<text text-anchor='middle' x='32' y='468' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='40' y='4' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='40' y='20' fill='currentColor' style='font-size:1em'>e</text>
+<text text-anchor='middle' x='40' y='36' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='40' y='84' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='40' y='116' fill='currentColor' style='font-size:1em'>[</text>
+<text text-anchor='middle' x='40' y='132' fill='currentColor' style='font-size:1em'>&lt;</text>
+<text text-anchor='middle' x='40' y='180' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='40' y='228' fill='currentColor' style='font-size:1em'>&lt;</text>
+<text text-anchor='middle' x='40' y='276' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='40' y='324' fill='currentColor' style='font-size:1em'>&lt;</text>
+<text text-anchor='middle' x='40' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='40' y='420' fill='currentColor' style='font-size:1em'>&lt;</text>
+<text text-anchor='middle' x='40' y='436' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='40' y='452' fill='currentColor' style='font-size:1em'>e</text>
+<text text-anchor='middle' x='40' y='468' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='48' y='4' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='48' y='20' fill='currentColor' style='font-size:1em'>n</text>
+<text text-anchor='middle' x='48' y='36' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='48' y='84' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='48' y='116' fill='currentColor' style='font-size:1em'>R</text>
+<text text-anchor='middle' x='48' y='132' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='48' y='180' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='48' y='228' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='48' y='276' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='48' y='324' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='48' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='48' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='48' y='436' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='48' y='452' fill='currentColor' style='font-size:1em'>n</text>
+<text text-anchor='middle' x='48' y='468' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='56' y='4' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='56' y='20' fill='currentColor' style='font-size:1em'>t</text>
+<text text-anchor='middle' x='56' y='36' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='56' y='84' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='56' y='116' fill='currentColor' style='font-size:1em'>o</text>
+<text text-anchor='middle' x='56' y='132' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='56' y='180' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='56' y='228' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='56' y='276' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='56' y='324' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='56' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='56' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='56' y='436' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='56' y='452' fill='currentColor' style='font-size:1em'>t</text>
+<text text-anchor='middle' x='56' y='468' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='64' y='4' fill='currentColor' style='font-size:1em'>┐</text>
+<text text-anchor='middle' x='64' y='20' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='64' y='36' fill='currentColor' style='font-size:1em'>┘</text>
+<text text-anchor='middle' x='64' y='84' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='64' y='116' fill='currentColor' style='font-size:1em'>o</text>
+<text text-anchor='middle' x='64' y='132' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='64' y='180' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='64' y='228' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='64' y='276' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='64' y='308' fill='currentColor' style='font-size:1em'>[</text>
+<text text-anchor='middle' x='64' y='324' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='64' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='64' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='64' y='436' fill='currentColor' style='font-size:1em'>┐</text>
+<text text-anchor='middle' x='64' y='452' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='64' y='468' fill='currentColor' style='font-size:1em'>┘</text>
+<text text-anchor='middle' x='72' y='84' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='72' y='116' fill='currentColor' style='font-size:1em'>t</text>
+<text text-anchor='middle' x='72' y='132' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='72' y='180' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='72' y='212' fill='currentColor' style='font-size:1em'>[</text>
+<text text-anchor='middle' x='72' y='228' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='72' y='276' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='72' y='308' fill='currentColor' style='font-size:1em'>D</text>
+<text text-anchor='middle' x='72' y='324' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='72' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='72' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='80' y='84' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='80' y='132' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='80' y='180' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='80' y='212' fill='currentColor' style='font-size:1em'>T</text>
+<text text-anchor='middle' x='80' y='228' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='80' y='276' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='80' y='308' fill='currentColor' style='font-size:1em'>o</text>
+<text text-anchor='middle' x='80' y='324' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='80' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='80' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='88' y='84' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='88' y='116' fill='currentColor' style='font-size:1em'>N</text>
+<text text-anchor='middle' x='88' y='132' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='88' y='180' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='88' y='212' fill='currentColor' style='font-size:1em'>L</text>
+<text text-anchor='middle' x='88' y='228' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='88' y='276' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='88' y='308' fill='currentColor' style='font-size:1em'>m</text>
+<text text-anchor='middle' x='88' y='324' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='88' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='88' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='96' y='84' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='96' y='116' fill='currentColor' style='font-size:1em'>a</text>
+<text text-anchor='middle' x='96' y='132' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='96' y='180' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='96' y='212' fill='currentColor' style='font-size:1em'>D</text>
+<text text-anchor='middle' x='96' y='228' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='96' y='276' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='96' y='308' fill='currentColor' style='font-size:1em'>a</text>
+<text text-anchor='middle' x='96' y='324' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='96' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='96' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='104' y='84' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='104' y='116' fill='currentColor' style='font-size:1em'>m</text>
+<text text-anchor='middle' x='104' y='132' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='104' y='180' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='104' y='228' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='104' y='276' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='104' y='308' fill='currentColor' style='font-size:1em'>i</text>
+<text text-anchor='middle' x='104' y='324' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='104' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='104' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='112' y='84' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='112' y='116' fill='currentColor' style='font-size:1em'>e</text>
+<text text-anchor='middle' x='112' y='132' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='112' y='180' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='112' y='212' fill='currentColor' style='font-size:1em'>N</text>
+<text text-anchor='middle' x='112' y='228' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='112' y='276' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='112' y='308' fill='currentColor' style='font-size:1em'>n</text>
+<text text-anchor='middle' x='112' y='324' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='112' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='112' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='120' y='84' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='120' y='116' fill='currentColor' style='font-size:1em'>s</text>
+<text text-anchor='middle' x='120' y='132' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='120' y='180' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='120' y='212' fill='currentColor' style='font-size:1em'>a</text>
+<text text-anchor='middle' x='120' y='228' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='120' y='276' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='120' y='308' fill='currentColor' style='font-size:1em'>'</text>
+<text text-anchor='middle' x='120' y='324' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='120' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='120' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='128' y='84' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='128' y='116' fill='currentColor' style='font-size:1em'>e</text>
+<text text-anchor='middle' x='128' y='132' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='128' y='180' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='128' y='212' fill='currentColor' style='font-size:1em'>m</text>
+<text text-anchor='middle' x='128' y='228' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='128' y='276' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='128' y='308' fill='currentColor' style='font-size:1em'>s</text>
+<text text-anchor='middle' x='128' y='324' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='128' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='128' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='136' y='84' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='136' y='116' fill='currentColor' style='font-size:1em'>r</text>
+<text text-anchor='middle' x='136' y='132' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='136' y='180' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='136' y='212' fill='currentColor' style='font-size:1em'>e</text>
+<text text-anchor='middle' x='136' y='228' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='136' y='276' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='136' y='324' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='136' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='136' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='144' y='84' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='144' y='116' fill='currentColor' style='font-size:1em'>v</text>
+<text text-anchor='middle' x='144' y='132' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='144' y='180' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='144' y='212' fill='currentColor' style='font-size:1em'>s</text>
+<text text-anchor='middle' x='144' y='228' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='144' y='276' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='144' y='308' fill='currentColor' style='font-size:1em'>A</text>
+<text text-anchor='middle' x='144' y='324' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='144' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='144' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='152' y='84' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='152' y='116' fill='currentColor' style='font-size:1em'>e</text>
+<text text-anchor='middle' x='152' y='132' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='152' y='164' fill='currentColor' style='font-size:1em'>c</text>
+<text text-anchor='middle' x='152' y='180' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='152' y='212' fill='currentColor' style='font-size:1em'>e</text>
+<text text-anchor='middle' x='152' y='228' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='152' y='260' fill='currentColor' style='font-size:1em'>s</text>
+<text text-anchor='middle' x='152' y='276' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='152' y='308' fill='currentColor' style='font-size:1em'>u</text>
+<text text-anchor='middle' x='152' y='324' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='152' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='152' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='160' y='84' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='160' y='116' fill='currentColor' style='font-size:1em'>r</text>
+<text text-anchor='middle' x='160' y='132' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='160' y='164' fill='currentColor' style='font-size:1em'>n</text>
+<text text-anchor='middle' x='160' y='180' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='160' y='212' fill='currentColor' style='font-size:1em'>r</text>
+<text text-anchor='middle' x='160' y='228' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='160' y='260' fill='currentColor' style='font-size:1em'>c</text>
+<text text-anchor='middle' x='160' y='276' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='160' y='308' fill='currentColor' style='font-size:1em'>t</text>
+<text text-anchor='middle' x='160' y='324' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='160' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='160' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='168' y='84' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='168' y='132' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='168' y='164' fill='currentColor' style='font-size:1em'>.</text>
+<text text-anchor='middle' x='168' y='180' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='168' y='212' fill='currentColor' style='font-size:1em'>v</text>
+<text text-anchor='middle' x='168' y='228' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='168' y='260' fill='currentColor' style='font-size:1em'>h</text>
+<text text-anchor='middle' x='168' y='276' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='168' y='308' fill='currentColor' style='font-size:1em'>h</text>
+<text text-anchor='middle' x='168' y='324' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='168' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='168' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='176' y='84' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='176' y='116' fill='currentColor' style='font-size:1em'>R</text>
+<text text-anchor='middle' x='176' y='132' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='176' y='180' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='176' y='212' fill='currentColor' style='font-size:1em'>e</text>
+<text text-anchor='middle' x='176' y='228' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='176' y='260' fill='currentColor' style='font-size:1em'>o</text>
+<text text-anchor='middle' x='176' y='276' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='176' y='308' fill='currentColor' style='font-size:1em'>o</text>
+<text text-anchor='middle' x='176' y='324' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='176' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='176' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='184' y='84' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='184' y='116' fill='currentColor' style='font-size:1em'>e</text>
+<text text-anchor='middle' x='184' y='132' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='184' y='180' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='184' y='212' fill='currentColor' style='font-size:1em'>r</text>
+<text text-anchor='middle' x='184' y='228' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='184' y='260' fill='currentColor' style='font-size:1em'>l</text>
+<text text-anchor='middle' x='184' y='276' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='184' y='308' fill='currentColor' style='font-size:1em'>r</text>
+<text text-anchor='middle' x='184' y='324' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='184' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='184' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='192' y='84' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='192' y='116' fill='currentColor' style='font-size:1em'>c</text>
+<text text-anchor='middle' x='192' y='132' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='192' y='180' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='192' y='228' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='192' y='260' fill='currentColor' style='font-size:1em'>a</text>
+<text text-anchor='middle' x='192' y='276' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='192' y='308' fill='currentColor' style='font-size:1em'>i</text>
+<text text-anchor='middle' x='192' y='324' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='192' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='192' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='200' y='84' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='200' y='116' fill='currentColor' style='font-size:1em'>o</text>
+<text text-anchor='middle' x='200' y='132' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='200' y='180' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='200' y='212' fill='currentColor' style='font-size:1em'>R</text>
+<text text-anchor='middle' x='200' y='228' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='200' y='260' fill='currentColor' style='font-size:1em'>r</text>
+<text text-anchor='middle' x='200' y='276' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='200' y='308' fill='currentColor' style='font-size:1em'>t</text>
+<text text-anchor='middle' x='200' y='324' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='200' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='200' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='208' y='4' fill='currentColor' style='font-size:1em'>┌</text>
+<text text-anchor='middle' x='208' y='20' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='208' y='36' fill='currentColor' style='font-size:1em'>└</text>
+<text text-anchor='middle' x='208' y='84' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='208' y='116' fill='currentColor' style='font-size:1em'>r</text>
+<text text-anchor='middle' x='208' y='132' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='208' y='180' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='208' y='212' fill='currentColor' style='font-size:1em'>e</text>
+<text text-anchor='middle' x='208' y='228' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='208' y='260' fill='currentColor' style='font-size:1em'>7</text>
+<text text-anchor='middle' x='208' y='276' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='208' y='308' fill='currentColor' style='font-size:1em'>a</text>
+<text text-anchor='middle' x='208' y='324' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='208' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='208' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='208' y='436' fill='currentColor' style='font-size:1em'>┌</text>
+<text text-anchor='middle' x='208' y='452' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='208' y='468' fill='currentColor' style='font-size:1em'>└</text>
+<text text-anchor='middle' x='216' y='4' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='216' y='20' fill='currentColor' style='font-size:1em'>R</text>
+<text text-anchor='middle' x='216' y='36' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='216' y='84' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='216' y='116' fill='currentColor' style='font-size:1em'>d</text>
+<text text-anchor='middle' x='216' y='132' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='216' y='180' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='216' y='212' fill='currentColor' style='font-size:1em'>c</text>
+<text text-anchor='middle' x='216' y='228' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='216' y='260' fill='currentColor' style='font-size:1em'>r</text>
+<text text-anchor='middle' x='216' y='276' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='216' y='308' fill='currentColor' style='font-size:1em'>t</text>
+<text text-anchor='middle' x='216' y='324' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='216' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='216' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='216' y='436' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='216' y='452' fill='currentColor' style='font-size:1em'>R</text>
+<text text-anchor='middle' x='216' y='468' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='224' y='4' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='224' y='20' fill='currentColor' style='font-size:1em'>o</text>
+<text text-anchor='middle' x='224' y='36' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='224' y='84' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='224' y='116' fill='currentColor' style='font-size:1em'>s</text>
+<text text-anchor='middle' x='224' y='132' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='224' y='180' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='224' y='212' fill='currentColor' style='font-size:1em'>o</text>
+<text text-anchor='middle' x='224' y='228' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='224' y='260' fill='currentColor' style='font-size:1em'>.</text>
+<text text-anchor='middle' x='224' y='276' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='224' y='308' fill='currentColor' style='font-size:1em'>i</text>
+<text text-anchor='middle' x='224' y='324' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='224' y='356' fill='currentColor' style='font-size:1em'>[</text>
+<text text-anchor='middle' x='224' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='224' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='224' y='436' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='224' y='452' fill='currentColor' style='font-size:1em'>o</text>
+<text text-anchor='middle' x='224' y='468' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='232' y='4' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='232' y='20' fill='currentColor' style='font-size:1em'>o</text>
+<text text-anchor='middle' x='232' y='36' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='232' y='84' fill='currentColor' style='font-size:1em'>&gt;</text>
+<text text-anchor='middle' x='232' y='116' fill='currentColor' style='font-size:1em'>]</text>
+<text text-anchor='middle' x='232' y='132' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='232' y='180' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='232' y='212' fill='currentColor' style='font-size:1em'>r</text>
+<text text-anchor='middle' x='232' y='228' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='232' y='260' fill='currentColor' style='font-size:1em'>c</text>
+<text text-anchor='middle' x='232' y='276' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='232' y='308' fill='currentColor' style='font-size:1em'>v</text>
+<text text-anchor='middle' x='232' y='324' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='232' y='356' fill='currentColor' style='font-size:1em'>s</text>
+<text text-anchor='middle' x='232' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='232' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='232' y='436' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='232' y='452' fill='currentColor' style='font-size:1em'>o</text>
+<text text-anchor='middle' x='232' y='468' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='240' y='4' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='240' y='20' fill='currentColor' style='font-size:1em'>t</text>
+<text text-anchor='middle' x='240' y='36' fill='currentColor' style='font-size:1em'>┬</text>
+<text text-anchor='middle' x='240' y='52' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='240' y='68' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='240' y='84' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='240' y='100' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='240' y='116' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='240' y='132' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='240' y='148' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='240' y='164' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='240' y='180' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='240' y='196' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='240' y='212' fill='currentColor' style='font-size:1em'>d</text>
+<text text-anchor='middle' x='240' y='228' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='240' y='244' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='240' y='260' fill='currentColor' style='font-size:1em'>n</text>
+<text text-anchor='middle' x='240' y='276' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='240' y='292' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='240' y='308' fill='currentColor' style='font-size:1em'>e</text>
+<text text-anchor='middle' x='240' y='324' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='240' y='340' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='240' y='356' fill='currentColor' style='font-size:1em'>c</text>
+<text text-anchor='middle' x='240' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='240' y='388' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='240' y='404' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='240' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='240' y='436' fill='currentColor' style='font-size:1em'>┴</text>
+<text text-anchor='middle' x='240' y='452' fill='currentColor' style='font-size:1em'>t</text>
+<text text-anchor='middle' x='240' y='468' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='248' y='4' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='248' y='20' fill='currentColor' style='font-size:1em'>(</text>
+<text text-anchor='middle' x='248' y='36' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='248' y='180' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='248' y='212' fill='currentColor' style='font-size:1em'>s</text>
+<text text-anchor='middle' x='248' y='228' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='248' y='260' fill='currentColor' style='font-size:1em'>.</text>
+<text text-anchor='middle' x='248' y='276' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='248' y='324' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='248' y='356' fill='currentColor' style='font-size:1em'>h</text>
+<text text-anchor='middle' x='248' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='248' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='248' y='436' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='248' y='452' fill='currentColor' style='font-size:1em'>(</text>
+<text text-anchor='middle' x='248' y='468' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='256' y='4' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='256' y='20' fill='currentColor' style='font-size:1em'>.</text>
+<text text-anchor='middle' x='256' y='36' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='256' y='180' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='256' y='212' fill='currentColor' style='font-size:1em'>]</text>
+<text text-anchor='middle' x='256' y='228' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='256' y='276' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='256' y='308' fill='currentColor' style='font-size:1em'>N</text>
+<text text-anchor='middle' x='256' y='324' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='256' y='356' fill='currentColor' style='font-size:1em'>o</text>
+<text text-anchor='middle' x='256' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='256' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='256' y='436' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='256' y='452' fill='currentColor' style='font-size:1em'>.</text>
+<text text-anchor='middle' x='256' y='468' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='264' y='4' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='264' y='20' fill='currentColor' style='font-size:1em'>)</text>
+<text text-anchor='middle' x='264' y='36' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='264' y='180' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='264' y='228' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='264' y='276' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='264' y='308' fill='currentColor' style='font-size:1em'>a</text>
+<text text-anchor='middle' x='264' y='324' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='264' y='356' fill='currentColor' style='font-size:1em'>l</text>
+<text text-anchor='middle' x='264' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='264' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='264' y='436' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='264' y='452' fill='currentColor' style='font-size:1em'>)</text>
+<text text-anchor='middle' x='264' y='468' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='272' y='4' fill='currentColor' style='font-size:1em'>┐</text>
+<text text-anchor='middle' x='272' y='20' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='272' y='36' fill='currentColor' style='font-size:1em'>┘</text>
+<text text-anchor='middle' x='272' y='180' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='272' y='228' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='272' y='276' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='272' y='308' fill='currentColor' style='font-size:1em'>m</text>
+<text text-anchor='middle' x='272' y='324' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='272' y='356' fill='currentColor' style='font-size:1em'>a</text>
+<text text-anchor='middle' x='272' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='272' y='404' fill='currentColor' style='font-size:1em'>I</text>
+<text text-anchor='middle' x='272' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='272' y='436' fill='currentColor' style='font-size:1em'>┐</text>
+<text text-anchor='middle' x='272' y='452' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='272' y='468' fill='currentColor' style='font-size:1em'>┘</text>
+<text text-anchor='middle' x='280' y='4' fill='currentColor' style='font-size:1em'>┌</text>
+<text text-anchor='middle' x='280' y='20' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='280' y='36' fill='currentColor' style='font-size:1em'>└</text>
+<text text-anchor='middle' x='280' y='180' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='280' y='228' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='280' y='276' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='280' y='308' fill='currentColor' style='font-size:1em'>e</text>
+<text text-anchor='middle' x='280' y='324' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='280' y='356' fill='currentColor' style='font-size:1em'>r</text>
+<text text-anchor='middle' x='280' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='280' y='404' fill='currentColor' style='font-size:1em'>P</text>
+<text text-anchor='middle' x='280' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='280' y='436' fill='currentColor' style='font-size:1em'>┌</text>
+<text text-anchor='middle' x='280' y='452' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='280' y='468' fill='currentColor' style='font-size:1em'>└</text>
+<text text-anchor='middle' x='288' y='4' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='288' y='20' fill='currentColor' style='font-size:1em'>T</text>
+<text text-anchor='middle' x='288' y='36' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='288' y='180' fill='currentColor' style='font-size:1em'>&gt;</text>
+<text text-anchor='middle' x='288' y='228' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='288' y='276' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='288' y='308' fill='currentColor' style='font-size:1em'>s</text>
+<text text-anchor='middle' x='288' y='324' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='288' y='356' fill='currentColor' style='font-size:1em'>7</text>
+<text text-anchor='middle' x='288' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='288' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='288' y='436' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='288' y='452' fill='currentColor' style='font-size:1em'>T</text>
+<text text-anchor='middle' x='288' y='468' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='296' y='4' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='296' y='20' fill='currentColor' style='font-size:1em'>L</text>
+<text text-anchor='middle' x='296' y='36' fill='currentColor' style='font-size:1em'>┬</text>
+<text text-anchor='middle' x='296' y='52' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='296' y='68' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='296' y='84' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='296' y='100' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='296' y='116' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='296' y='132' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='296' y='148' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='296' y='164' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='296' y='180' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='296' y='196' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='296' y='212' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='296' y='228' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='296' y='244' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='296' y='260' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='296' y='276' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='296' y='292' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='296' y='308' fill='currentColor' style='font-size:1em'>e</text>
+<text text-anchor='middle' x='296' y='324' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='296' y='340' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='296' y='356' fill='currentColor' style='font-size:1em'>r</text>
+<text text-anchor='middle' x='296' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='296' y='388' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='296' y='404' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='296' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='296' y='436' fill='currentColor' style='font-size:1em'>┴</text>
+<text text-anchor='middle' x='296' y='452' fill='currentColor' style='font-size:1em'>L</text>
+<text text-anchor='middle' x='296' y='468' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='304' y='4' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='304' y='20' fill='currentColor' style='font-size:1em'>D</text>
+<text text-anchor='middle' x='304' y='36' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='304' y='276' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='304' y='308' fill='currentColor' style='font-size:1em'>r</text>
+<text text-anchor='middle' x='304' y='324' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='304' y='356' fill='currentColor' style='font-size:1em'>.</text>
+<text text-anchor='middle' x='304' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='304' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='304' y='436' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='304' y='452' fill='currentColor' style='font-size:1em'>D</text>
+<text text-anchor='middle' x='304' y='468' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='312' y='4' fill='currentColor' style='font-size:1em'>┐</text>
+<text text-anchor='middle' x='312' y='20' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='312' y='36' fill='currentColor' style='font-size:1em'>┘</text>
+<text text-anchor='middle' x='312' y='276' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='312' y='308' fill='currentColor' style='font-size:1em'>v</text>
+<text text-anchor='middle' x='312' y='324' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='312' y='356' fill='currentColor' style='font-size:1em'>c</text>
+<text text-anchor='middle' x='312' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='312' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='312' y='436' fill='currentColor' style='font-size:1em'>┐</text>
+<text text-anchor='middle' x='312' y='452' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='312' y='468' fill='currentColor' style='font-size:1em'>┘</text>
+<text text-anchor='middle' x='320' y='4' fill='currentColor' style='font-size:1em'>┌</text>
+<text text-anchor='middle' x='320' y='20' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='320' y='36' fill='currentColor' style='font-size:1em'>└</text>
+<text text-anchor='middle' x='320' y='276' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='320' y='308' fill='currentColor' style='font-size:1em'>e</text>
+<text text-anchor='middle' x='320' y='324' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='320' y='356' fill='currentColor' style='font-size:1em'>n</text>
+<text text-anchor='middle' x='320' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='320' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='320' y='436' fill='currentColor' style='font-size:1em'>┌</text>
+<text text-anchor='middle' x='320' y='452' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='320' y='468' fill='currentColor' style='font-size:1em'>└</text>
+<text text-anchor='middle' x='328' y='4' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='328' y='20' fill='currentColor' style='font-size:1em'>A</text>
+<text text-anchor='middle' x='328' y='36' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='328' y='276' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='328' y='308' fill='currentColor' style='font-size:1em'>r</text>
+<text text-anchor='middle' x='328' y='324' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='328' y='356' fill='currentColor' style='font-size:1em'>]</text>
+<text text-anchor='middle' x='328' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='328' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='328' y='436' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='328' y='452' fill='currentColor' style='font-size:1em'>A</text>
+<text text-anchor='middle' x='328' y='468' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='336' y='4' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='336' y='20' fill='currentColor' style='font-size:1em'>u</text>
+<text text-anchor='middle' x='336' y='36' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='336' y='276' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='336' y='308' fill='currentColor' style='font-size:1em'>s</text>
+<text text-anchor='middle' x='336' y='324' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='336' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='336' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='336' y='436' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='336' y='452' fill='currentColor' style='font-size:1em'>u</text>
+<text text-anchor='middle' x='336' y='468' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='344' y='4' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='344' y='20' fill='currentColor' style='font-size:1em'>t</text>
+<text text-anchor='middle' x='344' y='36' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='344' y='276' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='344' y='308' fill='currentColor' style='font-size:1em'>]</text>
+<text text-anchor='middle' x='344' y='324' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='344' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='344' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='344' y='436' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='344' y='452' fill='currentColor' style='font-size:1em'>t</text>
+<text text-anchor='middle' x='344' y='468' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='352' y='4' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='352' y='20' fill='currentColor' style='font-size:1em'>h</text>
+<text text-anchor='middle' x='352' y='36' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='352' y='276' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='352' y='324' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='352' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='352' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='352' y='436' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='352' y='452' fill='currentColor' style='font-size:1em'>h</text>
+<text text-anchor='middle' x='352' y='468' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='360' y='4' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='360' y='20' fill='currentColor' style='font-size:1em'>o</text>
+<text text-anchor='middle' x='360' y='36' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='360' y='276' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='360' y='324' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='360' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='360' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='360' y='436' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='360' y='452' fill='currentColor' style='font-size:1em'>o</text>
+<text text-anchor='middle' x='360' y='468' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='368' y='4' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='368' y='20' fill='currentColor' style='font-size:1em'>r</text>
+<text text-anchor='middle' x='368' y='36' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='368' y='276' fill='currentColor' style='font-size:1em'>&gt;</text>
+<text text-anchor='middle' x='368' y='324' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='368' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='368' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='368' y='436' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='368' y='452' fill='currentColor' style='font-size:1em'>r</text>
+<text text-anchor='middle' x='368' y='468' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='376' y='4' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='376' y='20' fill='currentColor' style='font-size:1em'>i</text>
+<text text-anchor='middle' x='376' y='36' fill='currentColor' style='font-size:1em'>┬</text>
+<text text-anchor='middle' x='376' y='52' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='376' y='68' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='376' y='84' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='376' y='100' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='376' y='116' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='376' y='132' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='376' y='148' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='376' y='164' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='376' y='180' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='376' y='196' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='376' y='212' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='376' y='228' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='376' y='244' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='376' y='260' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='376' y='276' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='376' y='292' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='376' y='308' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='376' y='324' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='376' y='340' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='376' y='356' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='376' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='376' y='388' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='376' y='404' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='376' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='376' y='436' fill='currentColor' style='font-size:1em'>┴</text>
+<text text-anchor='middle' x='376' y='452' fill='currentColor' style='font-size:1em'>i</text>
+<text text-anchor='middle' x='376' y='468' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='384' y='4' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='384' y='20' fill='currentColor' style='font-size:1em'>t</text>
+<text text-anchor='middle' x='384' y='36' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='384' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='384' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='384' y='436' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='384' y='452' fill='currentColor' style='font-size:1em'>t</text>
+<text text-anchor='middle' x='384' y='468' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='392' y='4' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='392' y='20' fill='currentColor' style='font-size:1em'>a</text>
+<text text-anchor='middle' x='392' y='36' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='392' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='392' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='392' y='436' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='392' y='452' fill='currentColor' style='font-size:1em'>a</text>
+<text text-anchor='middle' x='392' y='468' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='400' y='4' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='400' y='20' fill='currentColor' style='font-size:1em'>t</text>
+<text text-anchor='middle' x='400' y='36' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='400' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='400' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='400' y='436' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='400' y='452' fill='currentColor' style='font-size:1em'>t</text>
+<text text-anchor='middle' x='400' y='468' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='408' y='4' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='408' y='20' fill='currentColor' style='font-size:1em'>i</text>
+<text text-anchor='middle' x='408' y='36' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='408' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='408' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='408' y='436' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='408' y='452' fill='currentColor' style='font-size:1em'>i</text>
+<text text-anchor='middle' x='408' y='468' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='416' y='4' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='416' y='20' fill='currentColor' style='font-size:1em'>v</text>
+<text text-anchor='middle' x='416' y='36' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='416' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='416' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='416' y='436' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='416' y='452' fill='currentColor' style='font-size:1em'>v</text>
+<text text-anchor='middle' x='416' y='468' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='424' y='4' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='424' y='20' fill='currentColor' style='font-size:1em'>e</text>
+<text text-anchor='middle' x='424' y='36' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='424' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='424' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='424' y='436' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='424' y='452' fill='currentColor' style='font-size:1em'>e</text>
+<text text-anchor='middle' x='424' y='468' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='432' y='4' fill='currentColor' style='font-size:1em'>┐</text>
+<text text-anchor='middle' x='432' y='20' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='432' y='36' fill='currentColor' style='font-size:1em'>┘</text>
+<text text-anchor='middle' x='432' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='432' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='432' y='436' fill='currentColor' style='font-size:1em'>┐</text>
+<text text-anchor='middle' x='432' y='452' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='432' y='468' fill='currentColor' style='font-size:1em'>┘</text>
+<text text-anchor='middle' x='440' y='4' fill='currentColor' style='font-size:1em'>┌</text>
+<text text-anchor='middle' x='440' y='20' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='440' y='36' fill='currentColor' style='font-size:1em'>└</text>
+<text text-anchor='middle' x='440' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='440' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='440' y='436' fill='currentColor' style='font-size:1em'>┌</text>
+<text text-anchor='middle' x='440' y='452' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='440' y='468' fill='currentColor' style='font-size:1em'>└</text>
+<text text-anchor='middle' x='448' y='4' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='448' y='20' fill='currentColor' style='font-size:1em'>C</text>
+<text text-anchor='middle' x='448' y='36' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='448' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='448' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='448' y='436' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='448' y='452' fill='currentColor' style='font-size:1em'>C</text>
+<text text-anchor='middle' x='448' y='468' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='456' y='4' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='456' y='20' fill='currentColor' style='font-size:1em'>l</text>
+<text text-anchor='middle' x='456' y='36' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='456' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='456' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='456' y='436' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='456' y='452' fill='currentColor' style='font-size:1em'>l</text>
+<text text-anchor='middle' x='456' y='468' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='464' y='4' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='464' y='20' fill='currentColor' style='font-size:1em'>o</text>
+<text text-anchor='middle' x='464' y='36' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='464' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='464' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='464' y='436' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='464' y='452' fill='currentColor' style='font-size:1em'>o</text>
+<text text-anchor='middle' x='464' y='468' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='472' y='4' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='472' y='20' fill='currentColor' style='font-size:1em'>u</text>
+<text text-anchor='middle' x='472' y='36' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='472' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='472' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='472' y='436' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='472' y='452' fill='currentColor' style='font-size:1em'>u</text>
+<text text-anchor='middle' x='472' y='468' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='480' y='4' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='480' y='20' fill='currentColor' style='font-size:1em'>d</text>
+<text text-anchor='middle' x='480' y='36' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='480' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='480' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='480' y='436' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='480' y='452' fill='currentColor' style='font-size:1em'>d</text>
+<text text-anchor='middle' x='480' y='468' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='488' y='4' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='488' y='20' fill='currentColor' style='font-size:1em'>f</text>
+<text text-anchor='middle' x='488' y='36' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='488' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='488' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='488' y='436' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='488' y='452' fill='currentColor' style='font-size:1em'>f</text>
+<text text-anchor='middle' x='488' y='468' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='496' y='4' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='496' y='20' fill='currentColor' style='font-size:1em'>l</text>
+<text text-anchor='middle' x='496' y='36' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='496' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='496' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='496' y='436' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='496' y='452' fill='currentColor' style='font-size:1em'>l</text>
+<text text-anchor='middle' x='496' y='468' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='504' y='4' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='504' y='20' fill='currentColor' style='font-size:1em'>a</text>
+<text text-anchor='middle' x='504' y='36' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='504' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='504' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='504' y='436' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='504' y='452' fill='currentColor' style='font-size:1em'>a</text>
+<text text-anchor='middle' x='504' y='468' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='512' y='4' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='512' y='20' fill='currentColor' style='font-size:1em'>r</text>
+<text text-anchor='middle' x='512' y='36' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='512' y='372' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='512' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='512' y='436' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='512' y='452' fill='currentColor' style='font-size:1em'>r</text>
+<text text-anchor='middle' x='512' y='468' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='520' y='4' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='520' y='20' fill='currentColor' style='font-size:1em'>e</text>
+<text text-anchor='middle' x='520' y='36' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='520' y='372' fill='currentColor' style='font-size:1em'>&gt;</text>
+<text text-anchor='middle' x='520' y='420' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='520' y='436' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='520' y='452' fill='currentColor' style='font-size:1em'>e</text>
+<text text-anchor='middle' x='520' y='468' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='528' y='4' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='528' y='36' fill='currentColor' style='font-size:1em'>┬</text>
+<text text-anchor='middle' x='528' y='52' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='528' y='68' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='528' y='84' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='528' y='100' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='528' y='116' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='528' y='132' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='528' y='148' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='528' y='164' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='528' y='180' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='528' y='196' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='528' y='212' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='528' y='228' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='528' y='244' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='528' y='260' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='528' y='276' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='528' y='292' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='528' y='308' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='528' y='324' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='528' y='340' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='528' y='356' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='528' y='372' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='528' y='388' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='528' y='404' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='528' y='420' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='528' y='436' fill='currentColor' style='font-size:1em'>┴</text>
+<text text-anchor='middle' x='528' y='468' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='536' y='4' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='536' y='20' fill='currentColor' style='font-size:1em'>N</text>
+<text text-anchor='middle' x='536' y='36' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='536' y='436' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='536' y='452' fill='currentColor' style='font-size:1em'>N</text>
+<text text-anchor='middle' x='536' y='468' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='544' y='4' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='544' y='20' fill='currentColor' style='font-size:1em'>a</text>
+<text text-anchor='middle' x='544' y='36' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='544' y='436' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='544' y='452' fill='currentColor' style='font-size:1em'>a</text>
+<text text-anchor='middle' x='544' y='468' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='552' y='4' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='552' y='20' fill='currentColor' style='font-size:1em'>m</text>
+<text text-anchor='middle' x='552' y='36' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='552' y='436' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='552' y='452' fill='currentColor' style='font-size:1em'>m</text>
+<text text-anchor='middle' x='552' y='468' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='560' y='4' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='560' y='20' fill='currentColor' style='font-size:1em'>e</text>
+<text text-anchor='middle' x='560' y='36' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='560' y='436' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='560' y='452' fill='currentColor' style='font-size:1em'>e</text>
+<text text-anchor='middle' x='560' y='468' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='568' y='4' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='568' y='20' fill='currentColor' style='font-size:1em'>s</text>
+<text text-anchor='middle' x='568' y='36' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='568' y='436' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='568' y='452' fill='currentColor' style='font-size:1em'>s</text>
+<text text-anchor='middle' x='568' y='468' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='576' y='4' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='576' y='20' fill='currentColor' style='font-size:1em'>e</text>
+<text text-anchor='middle' x='576' y='36' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='576' y='436' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='576' y='452' fill='currentColor' style='font-size:1em'>e</text>
+<text text-anchor='middle' x='576' y='468' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='584' y='4' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='584' y='20' fill='currentColor' style='font-size:1em'>r</text>
+<text text-anchor='middle' x='584' y='36' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='584' y='436' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='584' y='452' fill='currentColor' style='font-size:1em'>r</text>
+<text text-anchor='middle' x='584' y='468' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='592' y='4' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='592' y='20' fill='currentColor' style='font-size:1em'>v</text>
+<text text-anchor='middle' x='592' y='36' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='592' y='436' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='592' y='452' fill='currentColor' style='font-size:1em'>v</text>
+<text text-anchor='middle' x='592' y='468' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='600' y='4' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='600' y='20' fill='currentColor' style='font-size:1em'>e</text>
+<text text-anchor='middle' x='600' y='36' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='600' y='436' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='600' y='452' fill='currentColor' style='font-size:1em'>e</text>
+<text text-anchor='middle' x='600' y='468' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='608' y='4' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='608' y='20' fill='currentColor' style='font-size:1em'>r</text>
+<text text-anchor='middle' x='608' y='36' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='608' y='436' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='608' y='452' fill='currentColor' style='font-size:1em'>r</text>
+<text text-anchor='middle' x='608' y='468' fill='currentColor' style='font-size:1em'>─</text>
+<text text-anchor='middle' x='616' y='4' fill='currentColor' style='font-size:1em'>┐</text>
+<text text-anchor='middle' x='616' y='20' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='616' y='36' fill='currentColor' style='font-size:1em'>┘</text>
+<text text-anchor='middle' x='616' y='436' fill='currentColor' style='font-size:1em'>┐</text>
+<text text-anchor='middle' x='616' y='452' fill='currentColor' style='font-size:1em'>│</text>
+<text text-anchor='middle' x='616' y='468' fill='currentColor' style='font-size:1em'>┘</text>
+</g>
+
+    </svg>
+  
+</div>
+<p><code>scholar7r.cn</code> 域名只是解析了 A 记录，没有其他类型的解析，如果请求查询其他类型的解析，会发生什么事情？</p>
+<pre tabindex="0"><code>; &lt;&lt;&gt;&gt; DiG 9.20.15 &lt;&lt;&gt;&gt; +trace scholar7r.cn CNAME
+;; global options: +cmd
+.   36352 IN NS m.root-servers.net.
+.   36352 IN NS a.root-servers.net.
+.   36352 IN NS b.root-servers.net.
+.   36352 IN NS c.root-servers.net.
+.   36352 IN NS d.root-servers.net.
+.   36352 IN NS e.root-servers.net.
+.   36352 IN NS f.root-servers.net.
+.   36352 IN NS g.root-servers.net.
+.   36352 IN NS h.root-servers.net.
+.   36352 IN NS i.root-servers.net.
+.   36352 IN NS j.root-servers.net.
+.   36352 IN NS k.root-servers.net.
+.   36352 IN NS l.root-servers.net.
+;; Received 239 bytes from 223.5.5.5#53(223.5.5.5) in 7 ms
+
+cn.   172800 IN NS a.dns.cn.
+cn.   172800 IN NS b.dns.cn.
+cn.   172800 IN NS c.dns.cn.
+cn.   172800 IN NS d.dns.cn.
+cn.   172800 IN NS e.dns.cn.
+cn.   172800 IN NS ns.cernet.net.
+;; Received 723 bytes from 2001:500:a8::e#53(e.root-servers.net) in 206 ms
+
+scholar7r.cn.  86400 IN NS aria.ns.cloudflare.com.
+scholar7r.cn.  86400 IN NS patryk.ns.cloudflare.com.
+;; Received 672 bytes from 2001:dc7:1000::1#53(d.dns.cn) in 18 ms
+
+scholar7r.cn.  1800 IN SOA aria.ns.cloudflare.com. dns.cloudflare.com. 2389274792 10000 2400 604800 1800
+;; Received 361 bytes from 2606:4700:50::adf5:3a44#53(aria.ns.cloudflare.com) in 88 ms
+</code></pre><p>返回了一个 SOA 记录，记录对应一个权威名称服务器。这是域名不存在或者是查询失败的常见返回结果。</p>
+<h2 id="报文格式">报文格式<a href="#报文格式" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p>左侧为 DNS 报文格式，右侧为 Header 部分的详细分解。</p>
+
+
+
+<div class="goat svg-container ">
+  
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      font-family="Menlo,Lucida Console,monospace"
+      
+        viewBox="0 0 536 249"
+      >
+      <g transform='translate(8,16)'>
+<path d='M 0,16 L 104,16' fill='none' stroke='currentColor'></path>
+<path d='M 136,32 L 160,32' fill='none' stroke='currentColor'></path>
+<path d='M 160,32 L 184,32' fill='none' stroke='currentColor'></path>
+<path d='M 184,32 L 208,32' fill='none' stroke='currentColor'></path>
+<path d='M 208,32 L 232,32' fill='none' stroke='currentColor'></path>
+<path d='M 232,32 L 256,32' fill='none' stroke='currentColor'></path>
+<path d='M 256,32 L 280,32' fill='none' stroke='currentColor'></path>
+<path d='M 280,32 L 304,32' fill='none' stroke='currentColor'></path>
+<path d='M 304,32 L 328,32' fill='none' stroke='currentColor'></path>
+<path d='M 328,32 L 352,32' fill='none' stroke='currentColor'></path>
+<path d='M 352,32 L 376,32' fill='none' stroke='currentColor'></path>
+<path d='M 376,32 L 400,32' fill='none' stroke='currentColor'></path>
+<path d='M 400,32 L 424,32' fill='none' stroke='currentColor'></path>
+<path d='M 424,32 L 448,32' fill='none' stroke='currentColor'></path>
+<path d='M 448,32 L 472,32' fill='none' stroke='currentColor'></path>
+<path d='M 472,32 L 496,32' fill='none' stroke='currentColor'></path>
+<path d='M 496,32 L 520,32' fill='none' stroke='currentColor'></path>
+<path d='M 0,48 L 104,48' fill='none' stroke='currentColor'></path>
+<path d='M 136,64 L 160,64' fill='none' stroke='currentColor'></path>
+<path d='M 160,64 L 184,64' fill='none' stroke='currentColor'></path>
+<path d='M 184,64 L 208,64' fill='none' stroke='currentColor'></path>
+<path d='M 208,64 L 232,64' fill='none' stroke='currentColor'></path>
+<path d='M 232,64 L 256,64' fill='none' stroke='currentColor'></path>
+<path d='M 256,64 L 280,64' fill='none' stroke='currentColor'></path>
+<path d='M 280,64 L 304,64' fill='none' stroke='currentColor'></path>
+<path d='M 304,64 L 328,64' fill='none' stroke='currentColor'></path>
+<path d='M 328,64 L 352,64' fill='none' stroke='currentColor'></path>
+<path d='M 352,64 L 376,64' fill='none' stroke='currentColor'></path>
+<path d='M 376,64 L 400,64' fill='none' stroke='currentColor'></path>
+<path d='M 400,64 L 424,64' fill='none' stroke='currentColor'></path>
+<path d='M 424,64 L 448,64' fill='none' stroke='currentColor'></path>
+<path d='M 448,64 L 472,64' fill='none' stroke='currentColor'></path>
+<path d='M 472,64 L 496,64' fill='none' stroke='currentColor'></path>
+<path d='M 496,64 L 520,64' fill='none' stroke='currentColor'></path>
+<path d='M 0,80 L 104,80' fill='none' stroke='currentColor'></path>
+<path d='M 136,96 L 160,96' fill='none' stroke='currentColor'></path>
+<path d='M 160,96 L 184,96' fill='none' stroke='currentColor'></path>
+<path d='M 184,96 L 208,96' fill='none' stroke='currentColor'></path>
+<path d='M 208,96 L 232,96' fill='none' stroke='currentColor'></path>
+<path d='M 232,96 L 256,96' fill='none' stroke='currentColor'></path>
+<path d='M 256,96 L 280,96' fill='none' stroke='currentColor'></path>
+<path d='M 280,96 L 304,96' fill='none' stroke='currentColor'></path>
+<path d='M 304,96 L 328,96' fill='none' stroke='currentColor'></path>
+<path d='M 328,96 L 352,96' fill='none' stroke='currentColor'></path>
+<path d='M 352,96 L 376,96' fill='none' stroke='currentColor'></path>
+<path d='M 376,96 L 400,96' fill='none' stroke='currentColor'></path>
+<path d='M 400,96 L 424,96' fill='none' stroke='currentColor'></path>
+<path d='M 424,96 L 448,96' fill='none' stroke='currentColor'></path>
+<path d='M 448,96 L 472,96' fill='none' stroke='currentColor'></path>
+<path d='M 472,96 L 496,96' fill='none' stroke='currentColor'></path>
+<path d='M 496,96 L 520,96' fill='none' stroke='currentColor'></path>
+<path d='M 0,112 L 104,112' fill='none' stroke='currentColor'></path>
+<path d='M 136,128 L 160,128' fill='none' stroke='currentColor'></path>
+<path d='M 160,128 L 184,128' fill='none' stroke='currentColor'></path>
+<path d='M 184,128 L 208,128' fill='none' stroke='currentColor'></path>
+<path d='M 208,128 L 232,128' fill='none' stroke='currentColor'></path>
+<path d='M 232,128 L 256,128' fill='none' stroke='currentColor'></path>
+<path d='M 256,128 L 280,128' fill='none' stroke='currentColor'></path>
+<path d='M 280,128 L 304,128' fill='none' stroke='currentColor'></path>
+<path d='M 304,128 L 328,128' fill='none' stroke='currentColor'></path>
+<path d='M 328,128 L 352,128' fill='none' stroke='currentColor'></path>
+<path d='M 352,128 L 376,128' fill='none' stroke='currentColor'></path>
+<path d='M 376,128 L 400,128' fill='none' stroke='currentColor'></path>
+<path d='M 400,128 L 424,128' fill='none' stroke='currentColor'></path>
+<path d='M 424,128 L 448,128' fill='none' stroke='currentColor'></path>
+<path d='M 448,128 L 472,128' fill='none' stroke='currentColor'></path>
+<path d='M 472,128 L 496,128' fill='none' stroke='currentColor'></path>
+<path d='M 496,128 L 520,128' fill='none' stroke='currentColor'></path>
+<path d='M 0,144 L 104,144' fill='none' stroke='currentColor'></path>
+<path d='M 136,160 L 160,160' fill='none' stroke='currentColor'></path>
+<path d='M 160,160 L 184,160' fill='none' stroke='currentColor'></path>
+<path d='M 184,160 L 208,160' fill='none' stroke='currentColor'></path>
+<path d='M 208,160 L 232,160' fill='none' stroke='currentColor'></path>
+<path d='M 232,160 L 256,160' fill='none' stroke='currentColor'></path>
+<path d='M 256,160 L 280,160' fill='none' stroke='currentColor'></path>
+<path d='M 280,160 L 304,160' fill='none' stroke='currentColor'></path>
+<path d='M 304,160 L 328,160' fill='none' stroke='currentColor'></path>
+<path d='M 328,160 L 352,160' fill='none' stroke='currentColor'></path>
+<path d='M 352,160 L 376,160' fill='none' stroke='currentColor'></path>
+<path d='M 376,160 L 400,160' fill='none' stroke='currentColor'></path>
+<path d='M 400,160 L 424,160' fill='none' stroke='currentColor'></path>
+<path d='M 424,160 L 448,160' fill='none' stroke='currentColor'></path>
+<path d='M 448,160 L 472,160' fill='none' stroke='currentColor'></path>
+<path d='M 472,160 L 496,160' fill='none' stroke='currentColor'></path>
+<path d='M 496,160 L 520,160' fill='none' stroke='currentColor'></path>
+<path d='M 0,176 L 104,176' fill='none' stroke='currentColor'></path>
+<path d='M 136,192 L 160,192' fill='none' stroke='currentColor'></path>
+<path d='M 160,192 L 184,192' fill='none' stroke='currentColor'></path>
+<path d='M 184,192 L 208,192' fill='none' stroke='currentColor'></path>
+<path d='M 208,192 L 232,192' fill='none' stroke='currentColor'></path>
+<path d='M 232,192 L 256,192' fill='none' stroke='currentColor'></path>
+<path d='M 256,192 L 280,192' fill='none' stroke='currentColor'></path>
+<path d='M 280,192 L 304,192' fill='none' stroke='currentColor'></path>
+<path d='M 304,192 L 328,192' fill='none' stroke='currentColor'></path>
+<path d='M 328,192 L 352,192' fill='none' stroke='currentColor'></path>
+<path d='M 352,192 L 376,192' fill='none' stroke='currentColor'></path>
+<path d='M 376,192 L 400,192' fill='none' stroke='currentColor'></path>
+<path d='M 400,192 L 424,192' fill='none' stroke='currentColor'></path>
+<path d='M 424,192 L 448,192' fill='none' stroke='currentColor'></path>
+<path d='M 448,192 L 472,192' fill='none' stroke='currentColor'></path>
+<path d='M 472,192 L 496,192' fill='none' stroke='currentColor'></path>
+<path d='M 496,192 L 520,192' fill='none' stroke='currentColor'></path>
+<path d='M 136,224 L 160,224' fill='none' stroke='currentColor'></path>
+<path d='M 160,224 L 184,224' fill='none' stroke='currentColor'></path>
+<path d='M 184,224 L 208,224' fill='none' stroke='currentColor'></path>
+<path d='M 208,224 L 232,224' fill='none' stroke='currentColor'></path>
+<path d='M 232,224 L 256,224' fill='none' stroke='currentColor'></path>
+<path d='M 256,224 L 280,224' fill='none' stroke='currentColor'></path>
+<path d='M 280,224 L 304,224' fill='none' stroke='currentColor'></path>
+<path d='M 304,224 L 328,224' fill='none' stroke='currentColor'></path>
+<path d='M 328,224 L 352,224' fill='none' stroke='currentColor'></path>
+<path d='M 352,224 L 376,224' fill='none' stroke='currentColor'></path>
+<path d='M 376,224 L 400,224' fill='none' stroke='currentColor'></path>
+<path d='M 400,224 L 424,224' fill='none' stroke='currentColor'></path>
+<path d='M 424,224 L 448,224' fill='none' stroke='currentColor'></path>
+<path d='M 448,224 L 472,224' fill='none' stroke='currentColor'></path>
+<path d='M 472,224 L 496,224' fill='none' stroke='currentColor'></path>
+<path d='M 496,224 L 520,224' fill='none' stroke='currentColor'></path>
+<path d='M 0,16 L 0,48' fill='none' stroke='currentColor'></path>
+<path d='M 0,48 L 0,80' fill='none' stroke='currentColor'></path>
+<path d='M 0,80 L 0,112' fill='none' stroke='currentColor'></path>
+<path d='M 0,112 L 0,144' fill='none' stroke='currentColor'></path>
+<path d='M 0,144 L 0,176' fill='none' stroke='currentColor'></path>
+<path d='M 104,16 L 104,48' fill='none' stroke='currentColor'></path>
+<path d='M 104,48 L 104,80' fill='none' stroke='currentColor'></path>
+<path d='M 104,80 L 104,112' fill='none' stroke='currentColor'></path>
+<path d='M 104,112 L 104,144' fill='none' stroke='currentColor'></path>
+<path d='M 104,144 L 104,176' fill='none' stroke='currentColor'></path>
+<path d='M 136,32 L 136,64' fill='none' stroke='currentColor'></path>
+<path d='M 136,64 L 136,96' fill='none' stroke='currentColor'></path>
+<path d='M 136,96 L 136,128' fill='none' stroke='currentColor'></path>
+<path d='M 136,128 L 136,160' fill='none' stroke='currentColor'></path>
+<path d='M 136,160 L 136,192' fill='none' stroke='currentColor'></path>
+<path d='M 136,192 L 136,224' fill='none' stroke='currentColor'></path>
+<path d='M 160,64 L 160,96' fill='none' stroke='currentColor'></path>
+<path d='M 256,64 L 256,96' fill='none' stroke='currentColor'></path>
+<path d='M 280,64 L 280,96' fill='none' stroke='currentColor'></path>
+<path d='M 304,64 L 304,96' fill='none' stroke='currentColor'></path>
+<path d='M 328,64 L 328,96' fill='none' stroke='currentColor'></path>
+<path d='M 352,64 L 352,96' fill='none' stroke='currentColor'></path>
+<path d='M 424,64 L 424,96' fill='none' stroke='currentColor'></path>
+<path d='M 520,32 L 520,64' fill='none' stroke='currentColor'></path>
+<path d='M 520,64 L 520,96' fill='none' stroke='currentColor'></path>
+<path d='M 520,96 L 520,128' fill='none' stroke='currentColor'></path>
+<path d='M 520,128 L 520,160' fill='none' stroke='currentColor'></path>
+<path d='M 520,160 L 520,192' fill='none' stroke='currentColor'></path>
+<path d='M 520,192 L 520,224' fill='none' stroke='currentColor'></path>
+<text text-anchor='middle' x='16' y='36' fill='currentColor' style='font-size:1em'>H</text>
+<text text-anchor='middle' x='16' y='68' fill='currentColor' style='font-size:1em'>Q</text>
+<text text-anchor='middle' x='16' y='100' fill='currentColor' style='font-size:1em'>A</text>
+<text text-anchor='middle' x='16' y='132' fill='currentColor' style='font-size:1em'>A</text>
+<text text-anchor='middle' x='16' y='164' fill='currentColor' style='font-size:1em'>A</text>
+<text text-anchor='middle' x='24' y='36' fill='currentColor' style='font-size:1em'>e</text>
+<text text-anchor='middle' x='24' y='68' fill='currentColor' style='font-size:1em'>u</text>
+<text text-anchor='middle' x='24' y='100' fill='currentColor' style='font-size:1em'>n</text>
+<text text-anchor='middle' x='24' y='132' fill='currentColor' style='font-size:1em'>u</text>
+<text text-anchor='middle' x='24' y='164' fill='currentColor' style='font-size:1em'>d</text>
+<text text-anchor='middle' x='32' y='36' fill='currentColor' style='font-size:1em'>a</text>
+<text text-anchor='middle' x='32' y='68' fill='currentColor' style='font-size:1em'>e</text>
+<text text-anchor='middle' x='32' y='100' fill='currentColor' style='font-size:1em'>s</text>
+<text text-anchor='middle' x='32' y='132' fill='currentColor' style='font-size:1em'>t</text>
+<text text-anchor='middle' x='32' y='164' fill='currentColor' style='font-size:1em'>d</text>
+<text text-anchor='middle' x='40' y='36' fill='currentColor' style='font-size:1em'>d</text>
+<text text-anchor='middle' x='40' y='68' fill='currentColor' style='font-size:1em'>s</text>
+<text text-anchor='middle' x='40' y='100' fill='currentColor' style='font-size:1em'>w</text>
+<text text-anchor='middle' x='40' y='132' fill='currentColor' style='font-size:1em'>h</text>
+<text text-anchor='middle' x='40' y='164' fill='currentColor' style='font-size:1em'>i</text>
+<text text-anchor='middle' x='48' y='36' fill='currentColor' style='font-size:1em'>e</text>
+<text text-anchor='middle' x='48' y='68' fill='currentColor' style='font-size:1em'>t</text>
+<text text-anchor='middle' x='48' y='100' fill='currentColor' style='font-size:1em'>e</text>
+<text text-anchor='middle' x='48' y='132' fill='currentColor' style='font-size:1em'>o</text>
+<text text-anchor='middle' x='48' y='164' fill='currentColor' style='font-size:1em'>t</text>
+<text text-anchor='middle' x='56' y='36' fill='currentColor' style='font-size:1em'>r</text>
+<text text-anchor='middle' x='56' y='68' fill='currentColor' style='font-size:1em'>i</text>
+<text text-anchor='middle' x='56' y='100' fill='currentColor' style='font-size:1em'>r</text>
+<text text-anchor='middle' x='56' y='132' fill='currentColor' style='font-size:1em'>r</text>
+<text text-anchor='middle' x='56' y='164' fill='currentColor' style='font-size:1em'>i</text>
+<text text-anchor='middle' x='64' y='68' fill='currentColor' style='font-size:1em'>o</text>
+<text text-anchor='middle' x='64' y='132' fill='currentColor' style='font-size:1em'>i</text>
+<text text-anchor='middle' x='64' y='164' fill='currentColor' style='font-size:1em'>o</text>
+<text text-anchor='middle' x='72' y='68' fill='currentColor' style='font-size:1em'>n</text>
+<text text-anchor='middle' x='72' y='132' fill='currentColor' style='font-size:1em'>t</text>
+<text text-anchor='middle' x='72' y='164' fill='currentColor' style='font-size:1em'>n</text>
+<text text-anchor='middle' x='80' y='132' fill='currentColor' style='font-size:1em'>y</text>
+<text text-anchor='middle' x='80' y='164' fill='currentColor' style='font-size:1em'>a</text>
+<text text-anchor='middle' x='88' y='164' fill='currentColor' style='font-size:1em'>l</text>
+<text text-anchor='middle' x='144' y='84' fill='currentColor' style='font-size:1em'>Q</text>
+<text text-anchor='middle' x='152' y='20' fill='currentColor' style='font-size:1em'>0</text>
+<text text-anchor='middle' x='152' y='84' fill='currentColor' style='font-size:1em'>R</text>
+<text text-anchor='middle' x='176' y='20' fill='currentColor' style='font-size:1em'>1</text>
+<text text-anchor='middle' x='192' y='84' fill='currentColor' style='font-size:1em'>O</text>
+<text text-anchor='middle' x='200' y='20' fill='currentColor' style='font-size:1em'>2</text>
+<text text-anchor='middle' x='200' y='84' fill='currentColor' style='font-size:1em'>p</text>
+<text text-anchor='middle' x='208' y='84' fill='currentColor' style='font-size:1em'>c</text>
+<text text-anchor='middle' x='216' y='84' fill='currentColor' style='font-size:1em'>o</text>
+<text text-anchor='middle' x='224' y='20' fill='currentColor' style='font-size:1em'>3</text>
+<text text-anchor='middle' x='224' y='84' fill='currentColor' style='font-size:1em'>d</text>
+<text text-anchor='middle' x='232' y='84' fill='currentColor' style='font-size:1em'>e</text>
+<text text-anchor='middle' x='248' y='20' fill='currentColor' style='font-size:1em'>4</text>
+<text text-anchor='middle' x='264' y='84' fill='currentColor' style='font-size:1em'>A</text>
+<text text-anchor='middle' x='272' y='20' fill='currentColor' style='font-size:1em'>5</text>
+<text text-anchor='middle' x='272' y='84' fill='currentColor' style='font-size:1em'>A</text>
+<text text-anchor='middle' x='288' y='84' fill='currentColor' style='font-size:1em'>T</text>
+<text text-anchor='middle' x='296' y='20' fill='currentColor' style='font-size:1em'>6</text>
+<text text-anchor='middle' x='296' y='84' fill='currentColor' style='font-size:1em'>C</text>
+<text text-anchor='middle' x='304' y='116' fill='currentColor' style='font-size:1em'>Q</text>
+<text text-anchor='middle' x='304' y='148' fill='currentColor' style='font-size:1em'>A</text>
+<text text-anchor='middle' x='304' y='180' fill='currentColor' style='font-size:1em'>N</text>
+<text text-anchor='middle' x='304' y='212' fill='currentColor' style='font-size:1em'>A</text>
+<text text-anchor='middle' x='312' y='84' fill='currentColor' style='font-size:1em'>R</text>
+<text text-anchor='middle' x='312' y='116' fill='currentColor' style='font-size:1em'>D</text>
+<text text-anchor='middle' x='312' y='148' fill='currentColor' style='font-size:1em'>N</text>
+<text text-anchor='middle' x='312' y='180' fill='currentColor' style='font-size:1em'>S</text>
+<text text-anchor='middle' x='312' y='212' fill='currentColor' style='font-size:1em'>R</text>
+<text text-anchor='middle' x='320' y='20' fill='currentColor' style='font-size:1em'>7</text>
+<text text-anchor='middle' x='320' y='52' fill='currentColor' style='font-size:1em'>I</text>
+<text text-anchor='middle' x='320' y='84' fill='currentColor' style='font-size:1em'>D</text>
+<text text-anchor='middle' x='320' y='116' fill='currentColor' style='font-size:1em'>C</text>
+<text text-anchor='middle' x='320' y='148' fill='currentColor' style='font-size:1em'>C</text>
+<text text-anchor='middle' x='320' y='180' fill='currentColor' style='font-size:1em'>C</text>
+<text text-anchor='middle' x='320' y='212' fill='currentColor' style='font-size:1em'>C</text>
+<text text-anchor='middle' x='328' y='52' fill='currentColor' style='font-size:1em'>D</text>
+<text text-anchor='middle' x='328' y='116' fill='currentColor' style='font-size:1em'>O</text>
+<text text-anchor='middle' x='328' y='148' fill='currentColor' style='font-size:1em'>O</text>
+<text text-anchor='middle' x='328' y='180' fill='currentColor' style='font-size:1em'>O</text>
+<text text-anchor='middle' x='328' y='212' fill='currentColor' style='font-size:1em'>O</text>
+<text text-anchor='middle' x='336' y='84' fill='currentColor' style='font-size:1em'>R</text>
+<text text-anchor='middle' x='336' y='116' fill='currentColor' style='font-size:1em'>U</text>
+<text text-anchor='middle' x='336' y='148' fill='currentColor' style='font-size:1em'>U</text>
+<text text-anchor='middle' x='336' y='180' fill='currentColor' style='font-size:1em'>U</text>
+<text text-anchor='middle' x='336' y='212' fill='currentColor' style='font-size:1em'>U</text>
+<text text-anchor='middle' x='344' y='20' fill='currentColor' style='font-size:1em'>8</text>
+<text text-anchor='middle' x='344' y='84' fill='currentColor' style='font-size:1em'>A</text>
+<text text-anchor='middle' x='344' y='116' fill='currentColor' style='font-size:1em'>N</text>
+<text text-anchor='middle' x='344' y='148' fill='currentColor' style='font-size:1em'>N</text>
+<text text-anchor='middle' x='344' y='180' fill='currentColor' style='font-size:1em'>N</text>
+<text text-anchor='middle' x='344' y='212' fill='currentColor' style='font-size:1em'>N</text>
+<text text-anchor='middle' x='352' y='116' fill='currentColor' style='font-size:1em'>T</text>
+<text text-anchor='middle' x='352' y='148' fill='currentColor' style='font-size:1em'>T</text>
+<text text-anchor='middle' x='352' y='180' fill='currentColor' style='font-size:1em'>T</text>
+<text text-anchor='middle' x='352' y='212' fill='currentColor' style='font-size:1em'>T</text>
+<text text-anchor='middle' x='368' y='20' fill='currentColor' style='font-size:1em'>9</text>
+<text text-anchor='middle' x='384' y='84' fill='currentColor' style='font-size:1em'>Z</text>
+<text text-anchor='middle' x='392' y='4' fill='currentColor' style='font-size:1em'>1</text>
+<text text-anchor='middle' x='392' y='20' fill='currentColor' style='font-size:1em'>0</text>
+<text text-anchor='middle' x='416' y='4' fill='currentColor' style='font-size:1em'>1</text>
+<text text-anchor='middle' x='416' y='20' fill='currentColor' style='font-size:1em'>1</text>
+<text text-anchor='middle' x='440' y='4' fill='currentColor' style='font-size:1em'>1</text>
+<text text-anchor='middle' x='440' y='20' fill='currentColor' style='font-size:1em'>2</text>
+<text text-anchor='middle' x='456' y='84' fill='currentColor' style='font-size:1em'>R</text>
+<text text-anchor='middle' x='464' y='4' fill='currentColor' style='font-size:1em'>1</text>
+<text text-anchor='middle' x='464' y='20' fill='currentColor' style='font-size:1em'>3</text>
+<text text-anchor='middle' x='464' y='84' fill='currentColor' style='font-size:1em'>C</text>
+<text text-anchor='middle' x='472' y='84' fill='currentColor' style='font-size:1em'>O</text>
+<text text-anchor='middle' x='480' y='84' fill='currentColor' style='font-size:1em'>D</text>
+<text text-anchor='middle' x='488' y='4' fill='currentColor' style='font-size:1em'>1</text>
+<text text-anchor='middle' x='488' y='20' fill='currentColor' style='font-size:1em'>4</text>
+<text text-anchor='middle' x='488' y='84' fill='currentColor' style='font-size:1em'>E</text>
+<text text-anchor='middle' x='512' y='4' fill='currentColor' style='font-size:1em'>1</text>
+<text text-anchor='middle' x='512' y='20' fill='currentColor' style='font-size:1em'>5</text>
+</g>
+
+    </svg>
+  
+</div>
+<table>
+  <thead>
+      <tr>
+          <th>名称</th>
+          <th>描述</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>ID</td>
+          <td>由客户端生成的 16 位标识符，请求和回复使用相同的标识符。</td>
+      </tr>
+      <tr>
+          <td>QR</td>
+          <td>表示该报文为查询 <sup>(0)</sup> 或回复 <sup>(1)</sup>，占 1 位。</td>
+      </tr>
+      <tr>
+          <td>OPCODE</td>
+          <td>表示该查询的类型，一般情况下使用 0 表示该查询是一个标准查询，占 4 位。</td>
+      </tr>
+      <tr>
+          <td>AA</td>
+          <td>表示该查询的服务器是否为所查询域名的权威域名服务器，占 1 位。</td>
+      </tr>
+      <tr>
+          <td>TC</td>
+          <td>表示报文是否截断，占 1 位。</td>
+      </tr>
+      <tr>
+          <td>RD</td>
+          <td>表示该查询是否要求递归查询。占 1 位。</td>
+      </tr>
+      <tr>
+          <td>RA</td>
+          <td>表示递归查询是否可用。</td>
+      </tr>
+      <tr>
+          <td>Z</td>
+          <td>未来使用保留。</td>
+      </tr>
+      <tr>
+          <td>RCODE</td>
+          <td>回复代码：<br> - 0 无错误<br> - 1 格式错误：名称服务器无法解释查询 <br>- 2 服务端错误：名称服务器由于内部错误无法处理查询<br> - 3 名称错误：表示所查询的域名不存在<br> - 4 未实现：名称服务器不支持查询的类型<br> - 5 拒绝：名称服务器由于政策原因等无法执行操作</td>
+      </tr>
+      <tr>
+          <td>QDCOUNT</td>
+          <td>无符号的16位整数，指定问题部分中的条目数。</td>
+      </tr>
+      <tr>
+          <td>ANCOUNT</td>
+          <td>无符号的16位整数，指定应答部分中的资源记录数。</td>
+      </tr>
+      <tr>
+          <td>NSCOUNT</td>
+          <td>无符号的16位整数，指定权威记录部分中名称服务器资源记录的数量。</td>
+      </tr>
+      <tr>
+          <td>ARCOUNT</td>
+          <td>无符号的16位整数，指定附加记录部分中的资源记录数。</td>
+      </tr>
+  </tbody>
+</table>
+<p>Question 部分</p>
+
+
+
+<div class="goat svg-container ">
+  
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      font-family="Menlo,Lucida Console,monospace"
+      
+        viewBox="0 0 400 185"
+      >
+      <g transform='translate(8,16)'>
+<path d='M 0,32 L 24,32' fill='none' stroke='currentColor'></path>
+<path d='M 24,32 L 48,32' fill='none' stroke='currentColor'></path>
+<path d='M 48,32 L 72,32' fill='none' stroke='currentColor'></path>
+<path d='M 72,32 L 96,32' fill='none' stroke='currentColor'></path>
+<path d='M 96,32 L 120,32' fill='none' stroke='currentColor'></path>
+<path d='M 120,32 L 144,32' fill='none' stroke='currentColor'></path>
+<path d='M 144,32 L 168,32' fill='none' stroke='currentColor'></path>
+<path d='M 168,32 L 192,32' fill='none' stroke='currentColor'></path>
+<path d='M 192,32 L 216,32' fill='none' stroke='currentColor'></path>
+<path d='M 216,32 L 240,32' fill='none' stroke='currentColor'></path>
+<path d='M 240,32 L 264,32' fill='none' stroke='currentColor'></path>
+<path d='M 264,32 L 288,32' fill='none' stroke='currentColor'></path>
+<path d='M 288,32 L 312,32' fill='none' stroke='currentColor'></path>
+<path d='M 312,32 L 336,32' fill='none' stroke='currentColor'></path>
+<path d='M 336,32 L 360,32' fill='none' stroke='currentColor'></path>
+<path d='M 360,32 L 384,32' fill='none' stroke='currentColor'></path>
+<path d='M 0,96 L 24,96' fill='none' stroke='currentColor'></path>
+<path d='M 24,96 L 48,96' fill='none' stroke='currentColor'></path>
+<path d='M 48,96 L 72,96' fill='none' stroke='currentColor'></path>
+<path d='M 72,96 L 96,96' fill='none' stroke='currentColor'></path>
+<path d='M 96,96 L 120,96' fill='none' stroke='currentColor'></path>
+<path d='M 120,96 L 144,96' fill='none' stroke='currentColor'></path>
+<path d='M 144,96 L 168,96' fill='none' stroke='currentColor'></path>
+<path d='M 168,96 L 192,96' fill='none' stroke='currentColor'></path>
+<path d='M 192,96 L 216,96' fill='none' stroke='currentColor'></path>
+<path d='M 216,96 L 240,96' fill='none' stroke='currentColor'></path>
+<path d='M 240,96 L 264,96' fill='none' stroke='currentColor'></path>
+<path d='M 264,96 L 288,96' fill='none' stroke='currentColor'></path>
+<path d='M 288,96 L 312,96' fill='none' stroke='currentColor'></path>
+<path d='M 312,96 L 336,96' fill='none' stroke='currentColor'></path>
+<path d='M 336,96 L 360,96' fill='none' stroke='currentColor'></path>
+<path d='M 360,96 L 384,96' fill='none' stroke='currentColor'></path>
+<path d='M 0,128 L 24,128' fill='none' stroke='currentColor'></path>
+<path d='M 24,128 L 48,128' fill='none' stroke='currentColor'></path>
+<path d='M 48,128 L 72,128' fill='none' stroke='currentColor'></path>
+<path d='M 72,128 L 96,128' fill='none' stroke='currentColor'></path>
+<path d='M 96,128 L 120,128' fill='none' stroke='currentColor'></path>
+<path d='M 120,128 L 144,128' fill='none' stroke='currentColor'></path>
+<path d='M 144,128 L 168,128' fill='none' stroke='currentColor'></path>
+<path d='M 168,128 L 192,128' fill='none' stroke='currentColor'></path>
+<path d='M 192,128 L 216,128' fill='none' stroke='currentColor'></path>
+<path d='M 216,128 L 240,128' fill='none' stroke='currentColor'></path>
+<path d='M 240,128 L 264,128' fill='none' stroke='currentColor'></path>
+<path d='M 264,128 L 288,128' fill='none' stroke='currentColor'></path>
+<path d='M 288,128 L 312,128' fill='none' stroke='currentColor'></path>
+<path d='M 312,128 L 336,128' fill='none' stroke='currentColor'></path>
+<path d='M 336,128 L 360,128' fill='none' stroke='currentColor'></path>
+<path d='M 360,128 L 384,128' fill='none' stroke='currentColor'></path>
+<path d='M 0,160 L 24,160' fill='none' stroke='currentColor'></path>
+<path d='M 24,160 L 48,160' fill='none' stroke='currentColor'></path>
+<path d='M 48,160 L 72,160' fill='none' stroke='currentColor'></path>
+<path d='M 72,160 L 96,160' fill='none' stroke='currentColor'></path>
+<path d='M 96,160 L 120,160' fill='none' stroke='currentColor'></path>
+<path d='M 120,160 L 144,160' fill='none' stroke='currentColor'></path>
+<path d='M 144,160 L 168,160' fill='none' stroke='currentColor'></path>
+<path d='M 168,160 L 192,160' fill='none' stroke='currentColor'></path>
+<path d='M 192,160 L 216,160' fill='none' stroke='currentColor'></path>
+<path d='M 216,160 L 240,160' fill='none' stroke='currentColor'></path>
+<path d='M 240,160 L 264,160' fill='none' stroke='currentColor'></path>
+<path d='M 264,160 L 288,160' fill='none' stroke='currentColor'></path>
+<path d='M 288,160 L 312,160' fill='none' stroke='currentColor'></path>
+<path d='M 312,160 L 336,160' fill='none' stroke='currentColor'></path>
+<path d='M 336,160 L 360,160' fill='none' stroke='currentColor'></path>
+<path d='M 360,160 L 384,160' fill='none' stroke='currentColor'></path>
+<path d='M 0,32 L 0,48' fill='none' stroke='currentColor'></path>
+<path d='M 0,96 L 0,128' fill='none' stroke='currentColor'></path>
+<path d='M 0,128 L 0,160' fill='none' stroke='currentColor'></path>
+<path d='M 384,32 L 384,48' fill='none' stroke='currentColor'></path>
+<path d='M 384,96 L 384,128' fill='none' stroke='currentColor'></path>
+<path d='M 384,128 L 384,160' fill='none' stroke='currentColor'></path>
+<path d='M -4,72 L 4,56' fill='none' stroke='currentColor'></path>
+<path d='M -4,88 L 4,72' fill='none' stroke='currentColor'></path>
+<path d='M 380,72 L 388,56' fill='none' stroke='currentColor'></path>
+<path d='M 380,88 L 388,72' fill='none' stroke='currentColor'></path>
+<text text-anchor='middle' x='16' y='20' fill='currentColor' style='font-size:1em'>0</text>
+<text text-anchor='middle' x='40' y='20' fill='currentColor' style='font-size:1em'>1</text>
+<text text-anchor='middle' x='64' y='20' fill='currentColor' style='font-size:1em'>2</text>
+<text text-anchor='middle' x='88' y='20' fill='currentColor' style='font-size:1em'>3</text>
+<text text-anchor='middle' x='112' y='20' fill='currentColor' style='font-size:1em'>4</text>
+<text text-anchor='middle' x='136' y='20' fill='currentColor' style='font-size:1em'>5</text>
+<text text-anchor='middle' x='160' y='20' fill='currentColor' style='font-size:1em'>6</text>
+<text text-anchor='middle' x='176' y='68' fill='currentColor' style='font-size:1em'>Q</text>
+<text text-anchor='middle' x='176' y='116' fill='currentColor' style='font-size:1em'>Q</text>
+<text text-anchor='middle' x='176' y='148' fill='currentColor' style='font-size:1em'>Q</text>
+<text text-anchor='middle' x='184' y='20' fill='currentColor' style='font-size:1em'>7</text>
+<text text-anchor='middle' x='184' y='68' fill='currentColor' style='font-size:1em'>N</text>
+<text text-anchor='middle' x='184' y='116' fill='currentColor' style='font-size:1em'>T</text>
+<text text-anchor='middle' x='184' y='148' fill='currentColor' style='font-size:1em'>C</text>
+<text text-anchor='middle' x='192' y='68' fill='currentColor' style='font-size:1em'>A</text>
+<text text-anchor='middle' x='192' y='116' fill='currentColor' style='font-size:1em'>Y</text>
+<text text-anchor='middle' x='192' y='148' fill='currentColor' style='font-size:1em'>L</text>
+<text text-anchor='middle' x='200' y='68' fill='currentColor' style='font-size:1em'>M</text>
+<text text-anchor='middle' x='200' y='116' fill='currentColor' style='font-size:1em'>P</text>
+<text text-anchor='middle' x='200' y='148' fill='currentColor' style='font-size:1em'>A</text>
+<text text-anchor='middle' x='208' y='20' fill='currentColor' style='font-size:1em'>8</text>
+<text text-anchor='middle' x='208' y='68' fill='currentColor' style='font-size:1em'>E</text>
+<text text-anchor='middle' x='208' y='116' fill='currentColor' style='font-size:1em'>E</text>
+<text text-anchor='middle' x='208' y='148' fill='currentColor' style='font-size:1em'>S</text>
+<text text-anchor='middle' x='216' y='148' fill='currentColor' style='font-size:1em'>S</text>
+<text text-anchor='middle' x='232' y='20' fill='currentColor' style='font-size:1em'>9</text>
+<text text-anchor='middle' x='256' y='4' fill='currentColor' style='font-size:1em'>1</text>
+<text text-anchor='middle' x='256' y='20' fill='currentColor' style='font-size:1em'>0</text>
+<text text-anchor='middle' x='280' y='4' fill='currentColor' style='font-size:1em'>1</text>
+<text text-anchor='middle' x='280' y='20' fill='currentColor' style='font-size:1em'>1</text>
+<text text-anchor='middle' x='304' y='4' fill='currentColor' style='font-size:1em'>1</text>
+<text text-anchor='middle' x='304' y='20' fill='currentColor' style='font-size:1em'>2</text>
+<text text-anchor='middle' x='328' y='4' fill='currentColor' style='font-size:1em'>1</text>
+<text text-anchor='middle' x='328' y='20' fill='currentColor' style='font-size:1em'>3</text>
+<text text-anchor='middle' x='352' y='4' fill='currentColor' style='font-size:1em'>1</text>
+<text text-anchor='middle' x='352' y='20' fill='currentColor' style='font-size:1em'>4</text>
+<text text-anchor='middle' x='376' y='4' fill='currentColor' style='font-size:1em'>1</text>
+<text text-anchor='middle' x='376' y='20' fill='currentColor' style='font-size:1em'>5</text>
+</g>
+
+    </svg>
+  
+</div>
+<table>
+  <thead>
+      <tr>
+          <th>名称</th>
+          <th>描述</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>QNAME</td>
+          <td>所查询的域名。</td>
+      </tr>
+      <tr>
+          <td>QTYPE</td>
+          <td>查询记录的类型。</td>
+      </tr>
+      <tr>
+          <td>QCLASS</td>
+          <td>使用 0x0001，表示网络地址。</td>
+      </tr>
+  </tbody>
+</table>
+<p>Answer 部分</p>
+
+
+
+<div class="goat svg-container ">
+  
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      font-family="Menlo,Lucida Console,monospace"
+      
+        viewBox="0 0 400 297"
+      >
+      <g transform='translate(8,16)'>
+<path d='M 0,32 L 24,32' fill='none' stroke='currentColor'></path>
+<path d='M 24,32 L 48,32' fill='none' stroke='currentColor'></path>
+<path d='M 48,32 L 72,32' fill='none' stroke='currentColor'></path>
+<path d='M 72,32 L 96,32' fill='none' stroke='currentColor'></path>
+<path d='M 96,32 L 120,32' fill='none' stroke='currentColor'></path>
+<path d='M 120,32 L 144,32' fill='none' stroke='currentColor'></path>
+<path d='M 144,32 L 168,32' fill='none' stroke='currentColor'></path>
+<path d='M 168,32 L 192,32' fill='none' stroke='currentColor'></path>
+<path d='M 192,32 L 216,32' fill='none' stroke='currentColor'></path>
+<path d='M 216,32 L 240,32' fill='none' stroke='currentColor'></path>
+<path d='M 240,32 L 264,32' fill='none' stroke='currentColor'></path>
+<path d='M 264,32 L 288,32' fill='none' stroke='currentColor'></path>
+<path d='M 288,32 L 312,32' fill='none' stroke='currentColor'></path>
+<path d='M 312,32 L 336,32' fill='none' stroke='currentColor'></path>
+<path d='M 336,32 L 360,32' fill='none' stroke='currentColor'></path>
+<path d='M 360,32 L 384,32' fill='none' stroke='currentColor'></path>
+<path d='M 0,96 L 24,96' fill='none' stroke='currentColor'></path>
+<path d='M 24,96 L 48,96' fill='none' stroke='currentColor'></path>
+<path d='M 48,96 L 72,96' fill='none' stroke='currentColor'></path>
+<path d='M 72,96 L 96,96' fill='none' stroke='currentColor'></path>
+<path d='M 96,96 L 120,96' fill='none' stroke='currentColor'></path>
+<path d='M 120,96 L 144,96' fill='none' stroke='currentColor'></path>
+<path d='M 144,96 L 168,96' fill='none' stroke='currentColor'></path>
+<path d='M 168,96 L 192,96' fill='none' stroke='currentColor'></path>
+<path d='M 192,96 L 216,96' fill='none' stroke='currentColor'></path>
+<path d='M 216,96 L 240,96' fill='none' stroke='currentColor'></path>
+<path d='M 240,96 L 264,96' fill='none' stroke='currentColor'></path>
+<path d='M 264,96 L 288,96' fill='none' stroke='currentColor'></path>
+<path d='M 288,96 L 312,96' fill='none' stroke='currentColor'></path>
+<path d='M 312,96 L 336,96' fill='none' stroke='currentColor'></path>
+<path d='M 336,96 L 360,96' fill='none' stroke='currentColor'></path>
+<path d='M 360,96 L 384,96' fill='none' stroke='currentColor'></path>
+<path d='M 0,128 L 24,128' fill='none' stroke='currentColor'></path>
+<path d='M 24,128 L 48,128' fill='none' stroke='currentColor'></path>
+<path d='M 48,128 L 72,128' fill='none' stroke='currentColor'></path>
+<path d='M 72,128 L 96,128' fill='none' stroke='currentColor'></path>
+<path d='M 96,128 L 120,128' fill='none' stroke='currentColor'></path>
+<path d='M 120,128 L 144,128' fill='none' stroke='currentColor'></path>
+<path d='M 144,128 L 168,128' fill='none' stroke='currentColor'></path>
+<path d='M 168,128 L 192,128' fill='none' stroke='currentColor'></path>
+<path d='M 192,128 L 216,128' fill='none' stroke='currentColor'></path>
+<path d='M 216,128 L 240,128' fill='none' stroke='currentColor'></path>
+<path d='M 240,128 L 264,128' fill='none' stroke='currentColor'></path>
+<path d='M 264,128 L 288,128' fill='none' stroke='currentColor'></path>
+<path d='M 288,128 L 312,128' fill='none' stroke='currentColor'></path>
+<path d='M 312,128 L 336,128' fill='none' stroke='currentColor'></path>
+<path d='M 336,128 L 360,128' fill='none' stroke='currentColor'></path>
+<path d='M 360,128 L 384,128' fill='none' stroke='currentColor'></path>
+<path d='M 0,160 L 24,160' fill='none' stroke='currentColor'></path>
+<path d='M 24,160 L 48,160' fill='none' stroke='currentColor'></path>
+<path d='M 48,160 L 72,160' fill='none' stroke='currentColor'></path>
+<path d='M 72,160 L 96,160' fill='none' stroke='currentColor'></path>
+<path d='M 96,160 L 120,160' fill='none' stroke='currentColor'></path>
+<path d='M 120,160 L 144,160' fill='none' stroke='currentColor'></path>
+<path d='M 144,160 L 168,160' fill='none' stroke='currentColor'></path>
+<path d='M 168,160 L 192,160' fill='none' stroke='currentColor'></path>
+<path d='M 192,160 L 216,160' fill='none' stroke='currentColor'></path>
+<path d='M 216,160 L 240,160' fill='none' stroke='currentColor'></path>
+<path d='M 240,160 L 264,160' fill='none' stroke='currentColor'></path>
+<path d='M 264,160 L 288,160' fill='none' stroke='currentColor'></path>
+<path d='M 288,160 L 312,160' fill='none' stroke='currentColor'></path>
+<path d='M 312,160 L 336,160' fill='none' stroke='currentColor'></path>
+<path d='M 336,160 L 360,160' fill='none' stroke='currentColor'></path>
+<path d='M 360,160 L 384,160' fill='none' stroke='currentColor'></path>
+<path d='M 0,192 L 24,192' fill='none' stroke='currentColor'></path>
+<path d='M 24,192 L 48,192' fill='none' stroke='currentColor'></path>
+<path d='M 48,192 L 72,192' fill='none' stroke='currentColor'></path>
+<path d='M 72,192 L 96,192' fill='none' stroke='currentColor'></path>
+<path d='M 96,192 L 120,192' fill='none' stroke='currentColor'></path>
+<path d='M 120,192 L 144,192' fill='none' stroke='currentColor'></path>
+<path d='M 144,192 L 168,192' fill='none' stroke='currentColor'></path>
+<path d='M 168,192 L 192,192' fill='none' stroke='currentColor'></path>
+<path d='M 192,192 L 216,192' fill='none' stroke='currentColor'></path>
+<path d='M 216,192 L 240,192' fill='none' stroke='currentColor'></path>
+<path d='M 240,192 L 264,192' fill='none' stroke='currentColor'></path>
+<path d='M 264,192 L 288,192' fill='none' stroke='currentColor'></path>
+<path d='M 288,192 L 312,192' fill='none' stroke='currentColor'></path>
+<path d='M 312,192 L 336,192' fill='none' stroke='currentColor'></path>
+<path d='M 336,192 L 360,192' fill='none' stroke='currentColor'></path>
+<path d='M 360,192 L 384,192' fill='none' stroke='currentColor'></path>
+<path d='M 0,224 L 24,224' fill='none' stroke='currentColor'></path>
+<path d='M 24,224 L 48,224' fill='none' stroke='currentColor'></path>
+<path d='M 48,224 L 72,224' fill='none' stroke='currentColor'></path>
+<path d='M 72,224 L 96,224' fill='none' stroke='currentColor'></path>
+<path d='M 96,224 L 120,224' fill='none' stroke='currentColor'></path>
+<path d='M 120,224 L 144,224' fill='none' stroke='currentColor'></path>
+<path d='M 144,224 L 168,224' fill='none' stroke='currentColor'></path>
+<path d='M 168,224 L 192,224' fill='none' stroke='currentColor'></path>
+<path d='M 192,224 L 216,224' fill='none' stroke='currentColor'></path>
+<path d='M 216,224 L 240,224' fill='none' stroke='currentColor'></path>
+<path d='M 240,224 L 264,224' fill='none' stroke='currentColor'></path>
+<path d='M 264,224 L 288,224' fill='none' stroke='currentColor'></path>
+<path d='M 288,224 L 312,224' fill='none' stroke='currentColor'></path>
+<path d='M 312,224 L 336,224' fill='none' stroke='currentColor'></path>
+<path d='M 336,224 L 360,224' fill='none' stroke='currentColor'></path>
+<path d='M 360,224 L 384,224' fill='none' stroke='currentColor'></path>
+<path d='M 0,272 L 24,272' fill='none' stroke='currentColor'></path>
+<path d='M 24,272 L 48,272' fill='none' stroke='currentColor'></path>
+<path d='M 48,272 L 72,272' fill='none' stroke='currentColor'></path>
+<path d='M 72,272 L 96,272' fill='none' stroke='currentColor'></path>
+<path d='M 96,272 L 120,272' fill='none' stroke='currentColor'></path>
+<path d='M 120,272 L 144,272' fill='none' stroke='currentColor'></path>
+<path d='M 144,272 L 168,272' fill='none' stroke='currentColor'></path>
+<path d='M 168,272 L 192,272' fill='none' stroke='currentColor'></path>
+<path d='M 192,272 L 216,272' fill='none' stroke='currentColor'></path>
+<path d='M 216,272 L 240,272' fill='none' stroke='currentColor'></path>
+<path d='M 240,272 L 264,272' fill='none' stroke='currentColor'></path>
+<path d='M 264,272 L 288,272' fill='none' stroke='currentColor'></path>
+<path d='M 288,272 L 312,272' fill='none' stroke='currentColor'></path>
+<path d='M 312,272 L 336,272' fill='none' stroke='currentColor'></path>
+<path d='M 336,272 L 360,272' fill='none' stroke='currentColor'></path>
+<path d='M 360,272 L 384,272' fill='none' stroke='currentColor'></path>
+<path d='M 0,32 L 0,48' fill='none' stroke='currentColor'></path>
+<path d='M 0,96 L 0,128' fill='none' stroke='currentColor'></path>
+<path d='M 0,128 L 0,160' fill='none' stroke='currentColor'></path>
+<path d='M 0,160 L 0,192' fill='none' stroke='currentColor'></path>
+<path d='M 0,192 L 0,224' fill='none' stroke='currentColor'></path>
+<path d='M 384,32 L 384,48' fill='none' stroke='currentColor'></path>
+<path d='M 384,96 L 384,128' fill='none' stroke='currentColor'></path>
+<path d='M 384,128 L 384,160' fill='none' stroke='currentColor'></path>
+<path d='M 384,160 L 384,192' fill='none' stroke='currentColor'></path>
+<path d='M 384,192 L 384,224' fill='none' stroke='currentColor'></path>
+<path d='M -4,72 L 4,56' fill='none' stroke='currentColor'></path>
+<path d='M -4,88 L 4,72' fill='none' stroke='currentColor'></path>
+<path d='M -4,248 L 4,232' fill='none' stroke='currentColor'></path>
+<path d='M -4,264 L 4,248' fill='none' stroke='currentColor'></path>
+<path d='M 380,72 L 388,56' fill='none' stroke='currentColor'></path>
+<path d='M 380,88 L 388,72' fill='none' stroke='currentColor'></path>
+<path d='M 380,248 L 388,232' fill='none' stroke='currentColor'></path>
+<path d='M 380,264 L 388,248' fill='none' stroke='currentColor'></path>
+<text text-anchor='middle' x='16' y='20' fill='currentColor' style='font-size:1em'>0</text>
+<text text-anchor='middle' x='40' y='20' fill='currentColor' style='font-size:1em'>1</text>
+<text text-anchor='middle' x='64' y='20' fill='currentColor' style='font-size:1em'>2</text>
+<text text-anchor='middle' x='88' y='20' fill='currentColor' style='font-size:1em'>3</text>
+<text text-anchor='middle' x='112' y='20' fill='currentColor' style='font-size:1em'>4</text>
+<text text-anchor='middle' x='136' y='20' fill='currentColor' style='font-size:1em'>5</text>
+<text text-anchor='middle' x='160' y='20' fill='currentColor' style='font-size:1em'>6</text>
+<text text-anchor='middle' x='176' y='68' fill='currentColor' style='font-size:1em'>N</text>
+<text text-anchor='middle' x='176' y='116' fill='currentColor' style='font-size:1em'>T</text>
+<text text-anchor='middle' x='176' y='148' fill='currentColor' style='font-size:1em'>C</text>
+<text text-anchor='middle' x='176' y='180' fill='currentColor' style='font-size:1em'>T</text>
+<text text-anchor='middle' x='176' y='212' fill='currentColor' style='font-size:1em'>R</text>
+<text text-anchor='middle' x='176' y='244' fill='currentColor' style='font-size:1em'>R</text>
+<text text-anchor='middle' x='184' y='20' fill='currentColor' style='font-size:1em'>7</text>
+<text text-anchor='middle' x='184' y='68' fill='currentColor' style='font-size:1em'>A</text>
+<text text-anchor='middle' x='184' y='116' fill='currentColor' style='font-size:1em'>Y</text>
+<text text-anchor='middle' x='184' y='148' fill='currentColor' style='font-size:1em'>L</text>
+<text text-anchor='middle' x='184' y='180' fill='currentColor' style='font-size:1em'>T</text>
+<text text-anchor='middle' x='184' y='212' fill='currentColor' style='font-size:1em'>D</text>
+<text text-anchor='middle' x='184' y='244' fill='currentColor' style='font-size:1em'>D</text>
+<text text-anchor='middle' x='192' y='68' fill='currentColor' style='font-size:1em'>M</text>
+<text text-anchor='middle' x='192' y='116' fill='currentColor' style='font-size:1em'>P</text>
+<text text-anchor='middle' x='192' y='148' fill='currentColor' style='font-size:1em'>A</text>
+<text text-anchor='middle' x='192' y='180' fill='currentColor' style='font-size:1em'>L</text>
+<text text-anchor='middle' x='192' y='212' fill='currentColor' style='font-size:1em'>L</text>
+<text text-anchor='middle' x='192' y='244' fill='currentColor' style='font-size:1em'>A</text>
+<text text-anchor='middle' x='200' y='68' fill='currentColor' style='font-size:1em'>E</text>
+<text text-anchor='middle' x='200' y='116' fill='currentColor' style='font-size:1em'>E</text>
+<text text-anchor='middle' x='200' y='148' fill='currentColor' style='font-size:1em'>S</text>
+<text text-anchor='middle' x='200' y='212' fill='currentColor' style='font-size:1em'>E</text>
+<text text-anchor='middle' x='200' y='244' fill='currentColor' style='font-size:1em'>T</text>
+<text text-anchor='middle' x='208' y='20' fill='currentColor' style='font-size:1em'>8</text>
+<text text-anchor='middle' x='208' y='148' fill='currentColor' style='font-size:1em'>S</text>
+<text text-anchor='middle' x='208' y='212' fill='currentColor' style='font-size:1em'>N</text>
+<text text-anchor='middle' x='208' y='244' fill='currentColor' style='font-size:1em'>A</text>
+<text text-anchor='middle' x='216' y='212' fill='currentColor' style='font-size:1em'>G</text>
+<text text-anchor='middle' x='224' y='212' fill='currentColor' style='font-size:1em'>T</text>
+<text text-anchor='middle' x='232' y='20' fill='currentColor' style='font-size:1em'>9</text>
+<text text-anchor='middle' x='232' y='212' fill='currentColor' style='font-size:1em'>H</text>
+<text text-anchor='middle' x='256' y='4' fill='currentColor' style='font-size:1em'>1</text>
+<text text-anchor='middle' x='256' y='20' fill='currentColor' style='font-size:1em'>0</text>
+<text text-anchor='middle' x='280' y='4' fill='currentColor' style='font-size:1em'>1</text>
+<text text-anchor='middle' x='280' y='20' fill='currentColor' style='font-size:1em'>1</text>
+<text text-anchor='middle' x='304' y='4' fill='currentColor' style='font-size:1em'>1</text>
+<text text-anchor='middle' x='304' y='20' fill='currentColor' style='font-size:1em'>2</text>
+<text text-anchor='middle' x='328' y='4' fill='currentColor' style='font-size:1em'>1</text>
+<text text-anchor='middle' x='328' y='20' fill='currentColor' style='font-size:1em'>3</text>
+<text text-anchor='middle' x='352' y='4' fill='currentColor' style='font-size:1em'>1</text>
+<text text-anchor='middle' x='352' y='20' fill='currentColor' style='font-size:1em'>4</text>
+<text text-anchor='middle' x='376' y='4' fill='currentColor' style='font-size:1em'>1</text>
+<text text-anchor='middle' x='376' y='20' fill='currentColor' style='font-size:1em'>5</text>
+</g>
+
+    </svg>
+  
+</div>
+<table>
+  <thead>
+      <tr>
+          <th>名称</th>
+          <th>描述</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>NAME</td>
+          <td>所查询的域名。</td>
+      </tr>
+      <tr>
+          <td>TYPE</td>
+          <td>查询记录的类型。</td>
+      </tr>
+      <tr>
+          <td>CLASS</td>
+          <td>使用 0x0001，表示网络地址。</td>
+      </tr>
+      <tr>
+          <td>TTL</td>
+          <td>结果可被缓存的秒数。</td>
+      </tr>
+      <tr>
+          <td>RDLENGTH</td>
+          <td>RDATA 的长度。</td>
+      </tr>
+      <tr>
+          <td>RDATA</td>
+          <td>结果数据。</td>
+      </tr>
+  </tbody>
+</table>
+<hr data-content=" 引用 ">
+<ol>
+<li><a href="https://mislove.org/teaching/cs4700/spring11/handouts/project1-primer.pdf">Project 1: Simple DNS Client</a></li>
+<li><a href="https://fasionchan.com/network/dns/packet-format/">DNS 报文格式</a></li>
+</ol>
+      </div></div>
+
+  
+    
+<div class="pagination">
+  <div class="pagination__title">
+    <span class="pagination__title-h">阅读更多</span>
+    <hr />
+  </div>
+  <div class="pagination__buttons">
+    
+      <a href="//localhost:1313/posts/deserialization_bytes_to_struct/" class="button inline prev">
+        &lt; [<span class="button__text">如何将字节序列反序列化成结构</span>]
+      </a>
+    
+    
+      ::
+    
+    
+      <a href="//localhost:1313/posts/circular_buffer_in_golang/" class="button inline next">
+         [<span class="button__text">使用 Golang 实现环形缓冲区</span>] &gt;
+      </a>
+    
+  </div>
+</div>
+
+
+  
+
+  
+    
+
+  
+</article>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright copyright--user">
+        <span>Copyright (c) 2026 scholar7r.</span>
+    
+      <span>:: <a href="https://github.com/panr/hugo-theme-terminal" target="_blank">Theme</a> made by <a href="https://github.com/panr" target="_blank">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="/bundle.min.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>
