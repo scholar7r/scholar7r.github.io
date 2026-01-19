@@ -97,12 +97,6 @@ words = "词"
 logoText = "Inkwell"
 logoHomeLink = "/"
 
-[languages.zh.menu]
-[[languages.zh.menu.main]]
-identifier = "github"
-name = "GitHub"
-url = "https://github.com/scholar7r"
-
 [caches]
 [caches.images]
 dir = ':cacheDir/images'
