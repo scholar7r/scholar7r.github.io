@@ -4,6 +4,7 @@ date = 2025-06-07T19:10:10+08:00
 draft = false
 author = "scholar7r"
 authorTwitter = "scholar7r"
+tags = ["墨技"]
 +++
 
 在一个 Go 的并发项目中，假设我们有无限量的数据需要并发的进行处理，如果根据数据量为每一条数据都开辟一个 Goroutine，那么显而易见，大量的 Goroutine 被创建，这样会快速消耗掉计算机的所有资源，是不可取的。Worker Pool 模式可以定义最大的 Worker 数量，可以让程序中的 Worker 去处理数据，杜绝因为无限制创建 Goroutine 而导致的资源耗尽。

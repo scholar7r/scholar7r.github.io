@@ -4,6 +4,7 @@ date = 2025-09-03T17:48:36+08:00
 draft = false
 author = "scholar7r"
 authorTwitter = "scholar7r"
+tags = ["墨技"]
 +++
 环形缓冲区 Circular Buffer 也称之为圆形队列或循环缓冲区。用于表示一个固定尺寸，头尾相连的缓冲区数据结构，适合用用于缓存数据流。
 

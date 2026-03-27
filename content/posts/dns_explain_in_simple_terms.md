@@ -4,6 +4,7 @@ date = 2025-11-24T11:06:32+08:00
 draft = false
 author = "scholar7r"
 authorTwitter = "scholar7r"
+tags = ["墨技"]
 +++
 
 域名系统 (Domain Name System) 用作将域名和 IP 地址相互映射的一个分布式数据库，能够使人们更方便地访问互联网。DNS 使用 TCP 和 UDP 端口 53。目前对于每个一级域名长度的限制是 63 个字符，域名总长度不得超过 253 个字符。

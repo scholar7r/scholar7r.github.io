@@ -1,9 +1,10 @@
 baseurl = "/"
 languageCode = "zh-cn"
+defaultContentLanguage = "zh-cn"
 # Add it only if you keep the theme in the `themes` directory.
 # Remove it if you use the theme as a remote Hugo Module.
 theme = "terminal"
-pagination.pagerSize = 5
+paginate = 3
 
 copyright = "Copyright (c) 2026 scholar7r."
 
@@ -17,7 +18,7 @@ noClasses = false
 contentTypeName = "posts"
 
 # if you set this to 0, only submenu trigger will be visible
-showMenuItems = 2
+showMenuItems = 4
 
 # show selector to switch language
 showLanguageSelector = false
@@ -38,32 +39,21 @@ autoCover = false
 showLastUpdated = false
 
 # Provide a string as a prefix for the last update date. By default, it looks like this: 2020-xx-xx [Updated: 2020-xx-xx] :: Author
-# updatedDatePrefix = "Updated"
+updatedDatePrefix = "更新于"
 
 # whether to show a page's estimated reading time
-# readingTime = false # default
+readingTime = false
 
 # whether to show a table of contents
 # can be overridden in a page's front-matter
-# Toc = false # default
+Toc = false
 
 # set title for the table of contents
 # can be overridden in a page's front-matter
-# TocTitle = "Table of Contents" # default
+TocTitle = "目录"
 
 # Set date/time format for posts
-# This will impact the date/time displayed on
-# index.html, the posts list page, and on posts themselves
-# This value can also be configured per-post on front matter
-# If you have any issues with the timezone rendering differently
-# than you expected, please ensure your timezone is correctly set
-# on your server.
-# This value can be customized according to Hugo documentation:
-# https://gohugo.io/functions/time/format/
-# Default value (no changes needed):
-# dateFormat = "2006-01-02"
-# Example format, with date, time, and timezone abbreviation:
-# dateFormat = "2006-01-02 3:04:06 PM MST"
+dateFormat = "2006/01/02"
 
 
 [params.twitter]
@@ -74,11 +64,12 @@ creator = "scholar7r"
 site = "Inlwell"
 
 [languages]
-[languages.zh]
-languageName = "Chinese"
+[languages.zh-cn]
+languageName = "中文"
 title = "Inkwell"
 
-[languages.zh.params]
+
+[languages.zh-cn.params]
 subtitle = "随想随写。"
 owner = "scholar7r"
 keywords = "Golang, Gopher"
@@ -93,13 +84,41 @@ missingBackButtonLabel = "回到主页"
 minuteReadingTime = "分钟"
 words = "词"
 
-[languages.zh.params.logo]
+[languages.zh-cn.params.logo]
 logoText = "Inkwell"
 logoHomeLink = "/"
+
+[languages.zh-cn.menu]
+[[languages.zh-cn.menu.main]]
+identifier = "posts"
+name = "文章"
+url = "/"
+weight = 10
+
+[[languages.zh-cn.menu.main]]
+identifier = "tags"
+name = "标签"
+url = "/tags"
+weight = 20
+
+[[languages.zh-cn.menu.main]]
+identifier = "about"
+name = "关于"
+url = "/about"
+weight = 30
+
+[[languages.zh-cn.menu.main]]
+identifier = "github"
+name = "GitHub"
+url = "https://github.com/scholar7r"
+weight = 40
 
 [caches]
 [caches.images]
 dir = ':cacheDir/images'
+
+ [taxonomies]
+ tag = "tags"
 
 [markup]
 [markup.goldmark]

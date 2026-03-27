@@ -4,6 +4,7 @@ date = 2026-01-04T16:10:17+08:00
 draft = false
 author = "scholar7r"
 authorTwitter = "scholar7r"
+tags = ["启事"]
 +++
 
 `scholar7r.cn` 这个域名我已经使用了若干年，2026 年 1 月 4 日，阿里云向我发送了备案信息异常通知，内容如下：
