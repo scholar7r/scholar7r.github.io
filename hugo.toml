@@ -4,7 +4,7 @@ defaultContentLanguage = "zh-cn"
 # Add it only if you keep the theme in the `themes` directory.
 # Remove it if you use the theme as a remote Hugo Module.
 theme = "terminal"
-paginate = 3
+pagination.pagerSize = 3
 
 copyright = "Copyright (c) 2026 scholar7r."
 
