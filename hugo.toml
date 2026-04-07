@@ -108,23 +108,29 @@ url = "/about"
 weight = 30
 
 [[languages.zh-cn.menu.main]]
+identifier = "bookmarks"
+name = "书签"
+url = "/bookmarks"
+weight = 40
+
+[[languages.zh-cn.menu.main]]
 identifier = "github"
 name = "GitHub"
 url = "https://github.com/scholar7r"
-weight = 40
+weight = 50
 
 [[languages.zh-cn.menu.main]]
 identifier = "rss"
 name = "RSS"
 url = "/index.xml"
-weight = 50
+weight = 60
 
 [caches]
 [caches.images]
 dir = ':cacheDir/images'
 
- [taxonomies]
- tag = "tags"
+[taxonomies]
+tag = "tags"
 
 [markup]
 [markup.goldmark]
