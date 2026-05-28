@@ -1,5 +1,5 @@
 baseurl = "/"
-languageCode = "zh-cn"
+locale = "zh-cn"
 defaultContentLanguage = "zh-cn"
 # Add it only if you keep the theme in the `themes` directory.
 # Remove it if you use the theme as a remote Hugo Module.
@@ -46,11 +46,11 @@ readingTime = false
 
 # whether to show a table of contents
 # can be overridden in a page's front-matter
-Toc = false
+toc = true
 
 # set title for the table of contents
 # can be overridden in a page's front-matter
-TocTitle = "目录"
+tocTitle = "目录"
 
 # Set date/time format for posts
 dateFormat = "2006/01/02"
@@ -65,9 +65,7 @@ site = "Inlwell"
 
 [languages]
 [languages.zh-cn]
-languageName = "中文"
 title = "Inkwell"
-
 
 [languages.zh-cn.params]
 subtitle = "随想随写。"
