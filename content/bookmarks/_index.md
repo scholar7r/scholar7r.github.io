@@ -13,6 +13,10 @@ title = "书签"
 
 - [Diagon](https://diagon.arthursonzogni.com/)
 
+脚本：
+
+- [Rancher Cleanup](https://github.com/rancher/rancher-cleanup) 清理 Rancher 面板资源
+
 {{<details summary="闲言碎语">}}
 
 - ASCIIFlow 是一个用于生成 ASCII 流程图的工具，在我的记忆中是一个相当不错的工具。我经常使用它和 Diagon 搭配 Hugo 的 GOAT 来在我的博客中绘制流程图，很不幸的是这个工具的网站貌似无法访问了。
