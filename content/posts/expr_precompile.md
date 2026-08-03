@@ -5,6 +5,7 @@ draft = false
 author = "scholar7r"
 authorTwitter = "scholar7r"
 tags = ["墨技"]
+toc = false
 +++
 最近学习到 [expr](https://github.com/expr-lang/expr) 这个库，饶有兴致，正好有一个需求是取出数据库中的表达式并预编译运行，遂记录一下。
 
