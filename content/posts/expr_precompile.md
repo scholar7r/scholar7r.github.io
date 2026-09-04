@@ -32,7 +32,7 @@ type zone struct {
 
 这是一个最简化的记录，其中的 Condition 字段保存了一段条件表达式，用来筛选记录。解析记录的类型使用 `uint16` 表示，如果换成枚举之类的实现需要**将常量枚举等数据使用 `expr.Env` 通过 `Compile` 导入到表达式环境中**。
 
-每个记录都可以编写表达式，那就说明表达式肯定是包含重复的内容，因此需要筛选掉重复的进行过滤。我们在运行时的环境都是一样的，因此不需要考虑编译时传递环境的问题。当然，这个用例里面也没有用到这种方法，不需要考虑这个问题。
+对于每个记录，都可以为其添加一个条件表达式。基于这样的情况，就需要考虑存在重复的表达式。
 
 ```go
 type conditionCompiler struct {
@@ -40,7 +40,7 @@ type conditionCompiler struct {
 }
 ```
 
-这里我们用了一个 `map` 来保存编译的结果，下次匹配到相同的表达式就会直接从 `map` 中取出这个值，从而实现了预编译，当引入了新的条件表达式之后，需要实现追加编译。
+使用 `map` 来保存条件表达式和编译产物，下次匹配到相同的表达式就会直接从 `map` 中取出这个值，从而实现了预编译。当引入了新的条件表达式之后，需要进行追加编译。
 
 ```go
 func (cc *conditionCompiler) Precompile() error {
@@ -57,7 +57,7 @@ func (cc *conditionCompiler) Precompile() error {
 }
 ```
 
-在进行预编译之前，需要将 `Condition` 不为空的记录的 `Condition` 值写入到 `map` 的 `key` 中，用于后续编译。从上面的 `Precompile` 方法可以看出，`expr.Compile(k)` 中的 `k` 直接使用的 `map` 的 `key`，这样设计后续更加容易匹配表达式和检查是否需要追加编译。
+在进行预编译之前，需要将 `Condition` 不为空的记录的 `Condition` 值写入到 `map` 的 `key` 中，用于后续编译。从上面的 `Precompile` 方法可以看出，`expr.Compile(k)` 中的 `k` 直接使用的 `map` 的 `key`，这样设计使得后续能够更加容易检查表达式是否需要追加编译。
 
 ```go
 func main() {
