@@ -12,7 +12,3 @@ title = "书签"
 小工具：
 
 - [Diagon](https://diagon.arthursonzogni.com/)
-
-脚本：
-
-- [Rancher Cleanup](https://github.com/rancher/rancher-cleanup) 清理 Rancher 面板资源
