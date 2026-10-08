@@ -4,13 +4,13 @@ date = "2026-09-17T10:04:31+08:00"
 author = "scholar7r"
 authorTwitter = "scholar7r"
 cover = "https://doco.cd/latest/images/doco-cd_logo.svg"
-description = "学习 Kubernetes 也有一段时间了，前好些日子给家里的 Home Lab. 上线了 Flux CD 做持续部署。向 GitHub 提交，等待滚动更新确实更加畅快。想到自己还有很多运行在公网上的服务，如果也能做 GitOps，岂不美哉？"
+description = "学习 Kubernetes 也有一段时间了，前好些日子给家里的 Home Lab. 上线了 Flux CD 做持续部署。向 GitHub 提交变更，等待滚动更新即可。想到自己还有很多运行在公网上的服务，如果也能做 GitOps，岂不美哉？"
 tags = ["墨技"]
 +++
 
 ## 背景
 
-学习 Kubernetes 也有一段时间了，前好些日子给家里的 Home Lab. 上线了 Flux CD 做持续部署。向 GitHub 提交，等待滚动更新确实更加畅快。想到自己还有很多运行在公网上的服务，都跑在 Docker 中，如果也能做 GitOps，岂不美哉？
+学习 Kubernetes 也有一段时间了，前好些日子给家里的 Home Lab. 上线了 Flux CD 做持续部署。向 GitHub 提交变更，等待滚动更新即可。想到自己还有很多运行在公网上的服务，都跑在 Docker 中，如果也能做 GitOps，岂不美哉？
 
 说干就干，在 Google Cloud 免费层有一台免费的 E2 Micro，打着不用白不用的原则，一直运行着 Vaultwarden 密码存储。当然，这只是文章中案例，<b>进行迁移之前，需要结合自己此前的部署环境设计迁移步骤。</b>否则，就会有弄丢的数据和抓耳挠腮鞭策 AI 的人。
 
