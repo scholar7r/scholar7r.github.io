@@ -18,7 +18,7 @@ noClasses = false
 contentTypeName = "posts"
 
 # if you set this to 0, only submenu trigger will be visible
-showMenuItems = 5
+showMenuItems = 4
 
 # show selector to switch language
 showLanguageSelector = false
@@ -72,7 +72,7 @@ subtitle = "随想随写。"
 owner = "scholar7r"
 keywords = "Golang, Gopher"
 copyright = "Copyright (c) 2026 scholar7r."
-menuMore = "更多"
+menuMore = "菜单"
 readMore = "阅读原文"
 readOtherPosts = "阅读更多"
 newerPosts = "上一页"
@@ -94,40 +94,34 @@ url = "/"
 weight = 10
 
 [[languages.zh-cn.menu.main]]
-identifier = "tags"
-name = "标签"
-url = "/tags"
+identifier = "thoughts"
+name = "想法"
+url = "/thoughts"
 weight = 20
-
-[[languages.zh-cn.menu.main]]
-identifier = "about"
-name = "关于"
-url = "/about"
-weight = 30
 
 [[languages.zh-cn.menu.main]]
 identifier = "bookmarks"
 name = "书签"
 url = "/bookmarks"
-weight = 40
+weight = 30
 
 [[languages.zh-cn.menu.main]]
-identifier = "projects"
-name = "项目"
-url = "/projects"
-weight = 50
+identifier = "tags"
+name = "标签"
+url = "/tags"
+weight = 40
 
 [[languages.zh-cn.menu.main]]
 identifier = "github"
 name = "GitHub"
 url = "https://github.com/scholar7r"
-weight = 60
+weight = 50
 
 [[languages.zh-cn.menu.main]]
 identifier = "rss"
-name = "RSS"
+name = "Atom"
 url = "/index.xml"
-weight = 70
+weight = 60
 
 [caches]
 [caches.images]
