@@ -6,7 +6,7 @@ defaultContentLanguage = "zh-cn"
 theme = "terminal"
 pagination.pagerSize = 3
 
-copyright = "Copyright (c) 2026 scholar7r."
+copyright = "Copyright (c) NOW scholar7r"
 
 # Required for Chroma and the custom syntax highlighting.
 [markup.highlight]
