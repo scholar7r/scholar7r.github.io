@@ -3,7 +3,7 @@ title = "使用 Doco CD 实现 Docker GitOps"
 date = "2026-09-17T10:04:31+08:00"
 author = "scholar7r"
 authorTwitter = "scholar7r"
-cover = "https://doco.cd/latest/images/doco-cd_logo.svg"
+cover = "/images/doco_cd_logo.svg"
 description = "学习 Kubernetes 也有一段时间了，前好些日子给家里的 Home Lab. 上线了 Flux CD 做持续部署。向 GitHub 提交变更，等待滚动更新即可。想到自己还有很多运行在公网上的服务，如果也能做 GitOps，岂不美哉？"
 tags = ["墨技"]
 +++
